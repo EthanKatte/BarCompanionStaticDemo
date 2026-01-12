@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="static/css/tailwind.output.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<title>Users - John's bahr</title>
+<style>
+
+  /* Tier 3 - Dark Red */
+  .tasting-note-fruity {
+      background-color: #5e1f1f;
+      color: #ffffff;
+  }
+
+  /* Tier 2 - Medium Red */
+  .tasting-note-cookedfruit,
+  .tasting-note-berry,
+  .tasting-note-tropical,
+  .tasting-note-stonefruit,
+  .tasting-note-fruit {
+      background-color: #8c3434;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Red */
+  .tasting-note-marmalade,
+  .tasting-note-jam,
+  .tasting-note-applepie,
+  .tasting-note-raspberry,
+  .tasting-note-blackberry,
+  .tasting-note-blueberry,
+  .tasting-note-strawberry,
+  .tasting-note-orange,
+  .tasting-note-lemon,
+  .tasting-note-orangepeel,
+  .tasting-note-coconut,
+  .tasting-note-banana,
+  .tasting-note-plum,
+  .tasting-note-peach,
+  .tasting-note-cherry,
+  .tasting-note-apricot,
+  .tasting-note-raisin,
+  .tasting-note-grape,
+  .tasting-note-fig,
+  .tasting-note-apple {
+      background-color: #e5a3a3;
+      color: #333333;
+  }
+
+  /* Greens Theme */
+
+  /* Tier 3 - Dark Green */
+  .tasting-note-spice {
+      background-color: #1f4d3a;
+      color: #ffffff;
+  }
+
+  /* Tier 2 - Medium Green */
+  .tasting-note-bakingspice,
+  .tasting-note-savoryspice {
+      background-color: #347d5e;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Green */
+  .tasting-note-nutmeg,
+  .tasting-note-clove,
+  .tasting-note-coriander,
+  .tasting-note-cinnamon,
+  .tasting-note-staranise,
+  .tasting-note-whitepepper,
+  .tasting-note-spearmint,
+  .tasting-note-herbal,
+  .tasting-note-fennel,
+  .tasting-note-dill,
+  .tasting-note-blackpepper {
+      background-color: #a3d5c1;
+      color: #333333;
+  }
+
+
+  /* Blues Theme */
+
+  /* Tier 3 - Dark Blue */
+  .tasting-note-sweet {
+      background-color: #1f3a5e;
+      color: #ffffff;
+  }
+
+  /* Tier 2 - Medium Blue */
+  .tasting-note-vanillas,
+  .tasting-note-soda,
+  .tasting-note-dessert,
+  .tasting-note-chocolates {
+      background-color: #345e8c;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Blue */
+  .tasting-note-vanilla,
+  .tasting-note-custard,
+  .tasting-note-cremebrulee,
+  .tasting-note-cherrysoda,
+  .tasting-note-cremesoda,
+  .tasting-note-rootbeer,
+  .tasting-note-cola,
+  .tasting-note-brownsugar,
+  .tasting-note-butterscotch,
+  .tasting-note-caramel,
+  .tasting-note-grahamcracker,
+  .tasting-note-honey,
+  .tasting-note-licorice,
+  .tasting-note-maplesyrup,
+  .tasting-note-marshmellow,
+  .tasting-note-molasses,
+  .tasting-note-toffee,
+  .tasting-note-bitterchocolate,
+  .tasting-note-milkchocolate,
+  .tasting-note-chocolatemocha,
+  .tasting-note-chocolatemilk {
+      background-color: #a3c1e5;
+      color: #333333;
+  }
+
+
+  /* Yellows Theme */
+
+  /* Tier 3 - Dark Yellow */
+  .tasting-note-grain {
+      background-color: #7a5e1f;
+      color: #ffffff;
+  }
+
+  /* Tier 2 - Medium Yellow */
+  .tasting-note-corn,
+  .tasting-note-malt,
+  .tasting-note-rye,
+  .tasting-note-bread {
+      background-color: #b38b34;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Yellow */
+  .tasting-note-cereal,
+  .tasting-note-cocoa,
+  .tasting-note-bread,
+  .tasting-note-buckwheatpancakes {
+      background-color: #e5c585;
+      color: #333333;
+  }
+
+  /* Browns Theme */
+
+  /* Tier 3 - Dark Brown */
+  .tasting-note-wood {
+      background-color: #5a4033;
+      color: #ffffff;
+  }
+
+  /* Tier 2 - Medium Brown */
+  .tasting-note-oak,
+  .tasting-note-pine,
+  .tasting-note-nut,
+  .tasting-note-earthy {
+      background-color: #8c5b44;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Brown */
+  .tasting-note-smokyoak,
+  .tasting-note-sweetoak,
+  .tasting-note-toastedoak,
+  .tasting-note-cedar,
+  .tasting-note-almond,
+  .tasting-note-hazelnut,
+  .tasting-note-peanut,
+  .tasting-note-pecan,
+  .tasting-note-walnut,
+  .tasting-note-coffee,
+  .tasting-note-leather,
+  .tasting-note-tobacco,
+  .tasting-note-peat,
+  .tasting-note-smoke {
+      background-color: #d4b7a3;
+      color: #333333;
+  }
+
+
+  /* Pinks Theme */
+
+  /* Tier 3 - Dark Pink */
+  .tasting-note-floral {
+      background-color: #7a244f;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Pink */
+  .tasting-note-rose,
+  .tasting-note-heather,
+  .tasting-note-violet {
+      background-color: #e6a5c1;
+      color: #333333;
+  }
+  </style>
+</head>
+<body class="bg-base h-screen">
+<!-- Navigation Bar -->
+<nav class="bg-primary text-white p-4 flex items-center justify-between">
+<!-- Left-aligned Screensaver Button -->
+<div class="flex items-center">
+<a class="hover:underline flex items-center" href="index.html">
+<i class="fas fa-tv text-3xl"></i>
+</a>
+</div>
+<!-- Centered Navigation Links -->
+<ul class="flex justify-center space-x-6">
+<li>
+<a class="hover:underline flex items-center" href="home.html">
+<i class="fas fa-home text-3xl"></i>
+</a>
+</li>
+<li>
+<a class="hover:underline flex items-center" href="inventory.html">
+<i class="fas fa-boxes text-3xl"></i>
+</a>
+</li>
+<li>
+<a class="hover:underline flex items-center" href="users.html">
+<i class="fas fa-users text-3xl"></i>
+</a>
+</li>
+<li>
+<a class="hover:underline flex items-center" href="events.html">
+<i class="fas fa-calendar-days text-3xl"></i>
+</a>
+</li>
+</ul>
+<!-- Placeholder for Right Alignment -->
+<div></div>
+</nav>
+<div class="absolute fixed top-4 right-4 space-y-4 z-[9999]" id="alert-container"></div>
+<!-- Main Content -->
+<div class="container mx-auto py-8">
+<h1 class="text-3xl font-bold mb-6">Users</h1>
+<div class="flex">
+<div class="border p-1">
+<label class="btn btn-primary mr-2" for="add-user-modal">Add User + </label>
+</div>
+<input class="modal-toggle" id="add-user-modal" type="checkbox"/>
+<div class="modal">
+<div class="modal-box">
+<h3 class="font-bold text-lg">Add a New User</h3>
+<form class="space-y-4" id="addUserForm">
+<!-- Name -->
+<div class="form-control">
+<label class="label">
+<span class="label-text">Name</span>
+</label>
+<input class="input input-bordered" id="user-name" name="name" required="" type="text"/>
+</div>
+<!-- File Upload -->
+<div class="form-control">
+<label class="label">
+<span class="label-text">Upload Image</span>
+</label>
+<input accept="image/*" class="file-input file-input-bordered" id="image-upload" name="photo" required="" type="file"/>
+</div>
+<!-- Submit Button -->
+<div class="modal-action">
+<button class="btn btn-primary" type="submit">Add User</button>
+<label class="btn" for="add-user-modal">Cancel</label>
+</div>
+</form>
+</div>
+</div>
+<script>
+  document.getElementById("addUserForm").addEventListener("submit", async function (e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    // Get form data
+    const nameInput = document.getElementById("user-name");
+    const fileInput = document.getElementById("image-upload");
+    const file = fileInput.files[0];
+
+    if (!nameInput.value || !file) {
+      alert("Please provide a name and upload an image.");
+      return;
+    }
+
+    // Convert the image file to Base64
+    const base64Image = await fileToBase64(file);
+
+    // Prepare the JSON payload
+    const payload = {
+      name: nameInput.value,
+      photo: base64Image,
+    };
+
+    try {
+      showLoadingOverlay();
+      // Send the POST request
+      const response = await fetch("/api/add_user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        showAlert("User added successfully!");
+        console.log("Server Response:", result);
+        document.getElementById("addUserForm").reset(); // Reset the form
+        document.getElementById("add-user-modal").checked = false; // Close the modal
+        location.reload();
+      } else {
+        const error = await response.json();
+        showAlert("Failed to add user: " + (error.error || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      showAlert("An error occurred while submitting the form.");
+    }
+    hideLoadingOverlay();
+  });
+
+  // Helper function to convert a file to Base64
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file); // Read the file as a Base64 string
+    });
+  }
+</script>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<div class="card w-full bg-base-100 shadow-lg">
+<!-- Trigger Button -->
+<label class="cursor-pointer" for="user-modal-1">
+<figure>
+<img alt="Ethan" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Ethan.png"/>
+</figure>
+<div class="card-body">
+<h2 class="card-title">Ethan</h2>
+</div>
+</label>
+<input class="modal-toggle" id="user-modal-1" type="checkbox"/>
+<div class="modal">
+<div class="modal-box relative">
+<figure class="my-4">
+<img alt="Ethan" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Ethan.png"/>
+</figure>
+<!-- Modal Content -->
+<h3 class="font-bold text-lg">Ethan</h3>
+<p class="py-4">
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Gin" class="object-contain w-full h-full rounded-md" src="database_images/bottles/ink_gin.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Ink</h3>
+<h3 class="text-base">Gin</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-2" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-2" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-2" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-2" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-2" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-2" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-2" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-2" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-2" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-2" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">4/10</span>
+</div>
+        2025-06-07
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Good</p>
+<div class="badge badge-lg tasting-note-fruity">
+<span class="font-medium">Fruity</span>
+</div>
+<div class="badge badge-lg tasting-note-spice">
+<span class="font-medium">Spice</span>
+</div>
+<div class="badge badge-lg tasting-note-grain">
+<span class="font-medium">Grain</span>
+</div>
+<div class="badge badge-lg tasting-note-wood">
+<span class="font-medium">Wood</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Single Malt" class="object-contain w-full h-full rounded-md" src="database_images/bottles/archie_rose_single_malt.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Archie Rose</h3>
+<h3 class="text-base">Single Malt</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-6" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-6" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-6" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-6" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-6" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-6" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-6" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-6" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-6" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-6" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Rich malt sweetness with toffee and coffee. Smooth finish and well balanced.</p>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-toffee">
+<span class="font-medium">toffee</span>
+</div>
+<div class="badge badge-lg tasting-note-coffee">
+<span class="font-medium">coffee</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Gin" class="object-contain w-full h-full rounded-md" src="database_images/bottles/ink_gin.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Ink</h3>
+<h3 class="text-base">Gin</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-12" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-12" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-12" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-12" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-12" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-12" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-12" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-12" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-12" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-12" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Bright citrus and herbal lift. Piney backbone with a clean finish.</p>
+<div class="badge badge-lg tasting-note-lemon">
+<span class="font-medium">Lemon</span>
+</div>
+<div class="badge badge-lg tasting-note-orangepeel">
+<span class="font-medium">Orange Peel</span>
+</div>
+<div class="badge badge-lg tasting-note-herbal">
+<span class="font-medium">herbal</span>
+</div>
+<div class="badge badge-lg tasting-note-pine">
+<span class="font-medium">pine</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Private Reserve" class="object-contain w-full h-full rounded-md" src="database_images/bottles/blantons_private_reserve.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Blanton's</h3>
+<h3 class="text-base">Private Reserve</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-22" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-22" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-22" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-22" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-22" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-22" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-22" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-22" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-22" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-22" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Creamy vanilla and caramel with orange and polished oak.</p>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-caramel">
+<span class="font-medium">caramel</span>
+</div>
+<div class="badge badge-lg tasting-note-orange">
+<span class="font-medium">Orange</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Tequila" class="object-contain w-full h-full rounded-md" src="database_images/bottles/sierra_tequila.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Sierra</h3>
+<h3 class="text-base">Tequila</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-28" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-28" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-28" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-28" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-28" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-28" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-28" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-28" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-28" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-28" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">7/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Soft vanilla and caramel with light herbal oak.</p>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-caramel">
+<span class="font-medium">caramel</span>
+</div>
+<div class="badge badge-lg tasting-note-herbal">
+<span class="font-medium">herbal</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+</div>
+</div>
+</p>
+<!-- Close Button -->
+<label class="btn btn-sm btn-circle absolute right-2 top-2" for="user-modal-1">✕</label>
+</div>
+<!-- Overlay (click outside to close) -->
+<label class="modal-backdrop" for="user-modal-1"></label>
+</div>
+<!-- Modal -->
+</div>
+<div class="card w-full bg-base-100 shadow-lg">
+<!-- Trigger Button -->
+<label class="cursor-pointer" for="user-modal-4">
+<figure>
+<img alt="Kevin" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Kevin.png"/>
+</figure>
+<div class="card-body">
+<h2 class="card-title">Kevin</h2>
+</div>
+</label>
+<input class="modal-toggle" id="user-modal-4" type="checkbox"/>
+<div class="modal">
+<div class="modal-box relative">
+<figure class="my-4">
+<img alt="Kevin" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Kevin.png"/>
+</figure>
+<!-- Modal Content -->
+<h3 class="font-bold text-lg">Kevin</h3>
+<p class="py-4">
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Rye" class="object-contain w-full h-full rounded-md" src="database_images/bottles/archie_rose_rye.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Archie Rose</h3>
+<h3 class="text-base">Rye</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-7" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-7" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-7" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-7" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-7" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-7" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-7" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-7" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-7" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-7" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">7/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Spicy and bright with baked apple and cinnamon. Clean, herbal finish.</p>
+<div class="badge badge-lg tasting-note-cinnamon">
+<span class="font-medium">cinnamon</span>
+</div>
+<div class="badge badge-lg tasting-note-bakingspice">
+<span class="font-medium">baking spice</span>
+</div>
+<div class="badge badge-lg tasting-note-apple">
+<span class="font-medium">apple</span>
+</div>
+<div class="badge badge-lg tasting-note-herbal">
+<span class="font-medium">herbal</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Reposada Tequila" class="object-contain w-full h-full rounded-md" src="database_images/bottles/don_julio_reposado.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Don Julio</h3>
+<h3 class="text-base">Reposada Tequila</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-13" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-13" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-13" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-13" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-13" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-13" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-13" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-13" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-13" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-13" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Smooth agave with vanilla and caramel. Oak adds depth.</p>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-caramel">
+<span class="font-medium">caramel</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Opera House - Classical" class="object-contain w-full h-full rounded-md" src="database_images/bottles/archie_rose_classic.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Archie Rose</h3>
+<h3 class="text-base">Opera House - Classical</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-18" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-18" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-18" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-18" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-18" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-18" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-18" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-18" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-18" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-18" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Elegant and precise. Soft honeyed malt, floral lift, and clean oak.</p>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+<div class="badge badge-lg tasting-note-floral">
+<span class="font-medium">Floral</span>
+</div>
+<div class="badge badge-lg tasting-note-honey">
+<span class="font-medium">honey</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Single Barrel" class="object-contain w-full h-full rounded-md" src="database_images/bottles/jack_daniels_single_barrell.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Jack Daniel's</h3>
+<h3 class="text-base">Single Barrel</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-24" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-24" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-24" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-24" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-24" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-24" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-24" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-24" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-24" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-24" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Barrel-forward with caramel, vanilla, and smoky oak.</p>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-caramel">
+<span class="font-medium">caramel</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+<div class="badge badge-lg tasting-note-smoke">
+<span class="font-medium">smoke</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Botanic" class="object-contain w-full h-full rounded-md" src="database_images/bottles/husk_botanic.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Husk</h3>
+<h3 class="text-base">Botanic</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-30" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-30" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-30" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-30" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-30" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-30" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-30" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-30" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-30" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-30" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">7/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Citrus-led with roasted nutty depth and soft vanilla.</p>
+<div class="badge badge-lg tasting-note-lemon">
+<span class="font-medium">Lemon</span>
+</div>
+<div class="badge badge-lg tasting-note-herbal">
+<span class="font-medium">herbal</span>
+</div>
+<div class="badge badge-lg tasting-note-almond">
+<span class="font-medium">almond</span>
+</div>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+</div>
+</div>
+</p>
+<!-- Close Button -->
+<label class="btn btn-sm btn-circle absolute right-2 top-2" for="user-modal-4">✕</label>
+</div>
+<!-- Overlay (click outside to close) -->
+<label class="modal-backdrop" for="user-modal-4"></label>
+</div>
+<!-- Modal -->
+</div>
+<div class="card w-full bg-base-100 shadow-lg">
+<!-- Trigger Button -->
+<label class="cursor-pointer" for="user-modal-5">
+<figure>
+<img alt="Bill" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Bill.png"/>
+</figure>
+<div class="card-body">
+<h2 class="card-title">Bill</h2>
+</div>
+</label>
+<input class="modal-toggle" id="user-modal-5" type="checkbox"/>
+<div class="modal">
+<div class="modal-box relative">
+<figure class="my-4">
+<img alt="Bill" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Bill.png"/>
+</figure>
+<!-- Modal Content -->
+<h3 class="font-bold text-lg">Bill</h3>
+<p class="py-4">
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Rum Cask Single Malt" class="object-contain w-full h-full rounded-md" src="database_images/bottles/archie_rose_rum_cask.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Archie Rose</h3>
+<h3 class="text-base">Rum Cask Single Malt</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-8" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-8" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-8" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-8" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-8" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-8" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-8" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-8" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-8" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-8" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Sweet rum cask notes with brown sugar and molasses. Rounded oak and toffee.</p>
+<div class="badge badge-lg tasting-note-brownsugar">
+<span class="font-medium">brown sugar</span>
+</div>
+<div class="badge badge-lg tasting-note-molasses">
+<span class="font-medium">molasses</span>
+</div>
+<div class="badge badge-lg tasting-note-toffee">
+<span class="font-medium">toffee</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Mezcal" class="object-contain w-full h-full rounded-md" src="database_images/bottles/casamigos_mezcal.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Casamigos</h3>
+<h3 class="text-base">Mezcal</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-14" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-14" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-14" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-14" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-14" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-14" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-14" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-14" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-14" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-14" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">7/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Smoky and earthy with a touch of coffee and orange peel.</p>
+<div class="badge badge-lg tasting-note-smoke">
+<span class="font-medium">smoke</span>
+</div>
+<div class="badge badge-lg tasting-note-earthy">
+<span class="font-medium">Earthy</span>
+</div>
+<div class="badge badge-lg tasting-note-coffee">
+<span class="font-medium">coffee</span>
+</div>
+<div class="badge badge-lg tasting-note-orangepeel">
+<span class="font-medium">Orange Peel</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Six Malt New Make" class="object-contain w-full h-full rounded-md" src="database_images/bottles/archie_rose_six_malt.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Archie Rose</h3>
+<h3 class="text-base">Six Malt New Make</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-20" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-20" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-20" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-20" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-20" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-20" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-20" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-20" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-20" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-20" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">7/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Raw but rich. Cocoa and coffee lead with nutty sweetness.</p>
+<div class="badge badge-lg tasting-note-cocoa">
+<span class="font-medium">cocoa</span>
+</div>
+<div class="badge badge-lg tasting-note-coffee">
+<span class="font-medium">coffee</span>
+</div>
+<div class="badge badge-lg tasting-note-bitterchocolate">
+<span class="font-medium">bitter chocolate</span>
+</div>
+<div class="badge badge-lg tasting-note-peanut">
+<span class="font-medium">peanut</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Bitter Orange Gin" class="object-contain w-full h-full rounded-md" src="database_images/bottles/ink_orange_gin.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Ink</h3>
+<h3 class="text-base">Bitter Orange Gin</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-26" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-26" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-26" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-26" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-26" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-26" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-26" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-26" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-26" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-26" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Big orange oil, bright peel, and a piney backbone.</p>
+<div class="badge badge-lg tasting-note-orange">
+<span class="font-medium">Orange</span>
+</div>
+<div class="badge badge-lg tasting-note-orangepeel">
+<span class="font-medium">Orange Peel</span>
+</div>
+<div class="badge badge-lg tasting-note-herbal">
+<span class="font-medium">herbal</span>
+</div>
+<div class="badge badge-lg tasting-note-pine">
+<span class="font-medium">pine</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Dry Grown Rye" class="object-contain w-full h-full rounded-md" src="database_images/bottles/Dry_Grown_Rye_Archie_Rose.png"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Archie Rose</h3>
+<h3 class="text-base">Dry Grown Rye</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-32" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-32" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-32" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-32" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-32" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-32" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-32" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-32" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-32" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-32" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Spicy rye with baked apple and herbal lift.</p>
+<div class="badge badge-lg tasting-note-rye">
+<span class="font-medium">rye</span>
+</div>
+<div class="badge badge-lg tasting-note-bakingspice">
+<span class="font-medium">baking spice</span>
+</div>
+<div class="badge badge-lg tasting-note-applepie">
+<span class="font-medium">apple pie</span>
+</div>
+<div class="badge badge-lg tasting-note-herbal">
+<span class="font-medium">herbal</span>
+</div>
+</div>
+</div>
+</p>
+<!-- Close Button -->
+<label class="btn btn-sm btn-circle absolute right-2 top-2" for="user-modal-5">✕</label>
+</div>
+<!-- Overlay (click outside to close) -->
+<label class="modal-backdrop" for="user-modal-5"></label>
+</div>
+<!-- Modal -->
+</div>
+<div class="card w-full bg-base-100 shadow-lg">
+<!-- Trigger Button -->
+<label class="cursor-pointer" for="user-modal-6">
+<figure>
+<img alt="Marissa" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Marissa.png"/>
+</figure>
+<div class="card-body">
+<h2 class="card-title">Marissa</h2>
+</div>
+</label>
+<input class="modal-toggle" id="user-modal-6" type="checkbox"/>
+<div class="modal">
+<div class="modal-box relative">
+<figure class="my-4">
+<img alt="Marissa" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Marissa.png"/>
+</figure>
+<!-- Modal Content -->
+<h3 class="font-bold text-lg">Marissa</h3>
+<p class="py-4">
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Gold" class="object-contain w-full h-full rounded-md" src="database_images/bottles/blantons_gold.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Blanton's</h3>
+<h3 class="text-base">Gold</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-9" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-9" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-9" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-9" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-9" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-9" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-9" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-9" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-9" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-9" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">9/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Polished and rich. Vanilla, caramel, and orange peel carry into a long oak finish.</p>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-caramel">
+<span class="font-medium">caramel</span>
+</div>
+<div class="badge badge-lg tasting-note-orangepeel">
+<span class="font-medium">Orange Peel</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Spiced Bam Bam" class="object-contain w-full h-full rounded-md" src="database_images/bottles/husk_bam_bam.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Husk</h3>
+<h3 class="text-base">Spiced Bam Bam</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-15" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-15" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-15" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-15" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-15" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-15" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-15" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-15" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-15" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-15" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Warm spices and brown sugar. Vanilla and toffee linger.</p>
+<div class="badge badge-lg tasting-note-brownsugar">
+<span class="font-medium">brown sugar</span>
+</div>
+<div class="badge badge-lg tasting-note-cinnamon">
+<span class="font-medium">cinnamon</span>
+</div>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-toffee">
+<span class="font-medium">toffee</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Opera House - Contemporary" class="object-contain w-full h-full rounded-md" src="database_images/bottles/archie_rose_contemporary.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Archie Rose</h3>
+<h3 class="text-base">Opera House - Contemporary</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-19" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-19" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-19" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-19" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-19" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-19" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-19" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-19" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-19" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-19" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Bright and modern with citrus, tropical fruit, and gentle spice.</p>
+<div class="badge badge-lg tasting-note-tropical">
+<span class="font-medium">tropical</span>
+</div>
+<div class="badge badge-lg tasting-note-orange">
+<span class="font-medium">Orange</span>
+</div>
+<div class="badge badge-lg tasting-note-coconut">
+<span class="font-medium">coconut</span>
+</div>
+<div class="badge badge-lg tasting-note-bakingspice">
+<span class="font-medium">baking spice</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Honey Whiskey" class="object-contain w-full h-full rounded-md" src="database_images/bottles/drambuie.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Drambuie</h3>
+<h3 class="text-base">Honey Whiskey</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-25" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-25" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-25" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-25" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-25" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-25" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-25" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-25" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-25" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-25" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">7/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Honeyed and herbal with soft spice and vanilla.</p>
+<div class="badge badge-lg tasting-note-honey">
+<span class="font-medium">honey</span>
+</div>
+<div class="badge badge-lg tasting-note-bakingspice">
+<span class="font-medium">baking spice</span>
+</div>
+<div class="badge badge-lg tasting-note-herbal">
+<span class="font-medium">herbal</span>
+</div>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Pure Cane" class="object-contain w-full h-full rounded-md" src="database_images/bottles/husk_pure_cane.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Husk</h3>
+<h3 class="text-base">Pure Cane</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-31" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-31" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-31" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-31" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-31" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-31" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-31" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-31" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-31" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-31" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">7/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Clean cane sweetness with coconut and honey.</p>
+<div class="badge badge-lg tasting-note-honey">
+<span class="font-medium">honey</span>
+</div>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-coconut">
+<span class="font-medium">coconut</span>
+</div>
+<div class="badge badge-lg tasting-note-cereal">
+<span class="font-medium">cereal</span>
+</div>
+</div>
+</div>
+</p>
+<!-- Close Button -->
+<label class="btn btn-sm btn-circle absolute right-2 top-2" for="user-modal-6">✕</label>
+</div>
+<!-- Overlay (click outside to close) -->
+<label class="modal-backdrop" for="user-modal-6"></label>
+</div>
+<!-- Modal -->
+</div>
+<div class="card w-full bg-base-100 shadow-lg">
+<!-- Trigger Button -->
+<label class="cursor-pointer" for="user-modal-7">
+<figure>
+<img alt="Andy" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Andy.png"/>
+</figure>
+<div class="card-body">
+<h2 class="card-title">Andy</h2>
+</div>
+</label>
+<input class="modal-toggle" id="user-modal-7" type="checkbox"/>
+<div class="modal">
+<div class="modal-box relative">
+<figure class="my-4">
+<img alt="Andy" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Andy.png"/>
+</figure>
+<!-- Modal Content -->
+<h3 class="font-bold text-lg">Andy</h3>
+<p class="py-4">
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Old No.7" class="object-contain w-full h-full rounded-md" src="database_images/bottles/jack_daniels_no_7.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Jack Daniel's</h3>
+<h3 class="text-base">Old No.7</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-10" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-10" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-10" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-10" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-10" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-10" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-10" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-10" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-10" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-10" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">7/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Classic profile with toasted oak and vanilla. Light smoke and caramel.</p>
+<div class="badge badge-lg tasting-note-toastedoak">
+<span class="font-medium">toasted oak</span>
+</div>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-caramel">
+<span class="font-medium">caramel</span>
+</div>
+<div class="badge badge-lg tasting-note-smoke">
+<span class="font-medium">smoke</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Reposada Tequila" class="object-contain w-full h-full rounded-md" src="database_images/bottles/espolon_reposado.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Espolon</h3>
+<h3 class="text-base">Reposada Tequila</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-16" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-16" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-16" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-16" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-16" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-16" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-16" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-16" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-16" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-16" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">7/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Sweet agave with spice, oak, and caramel.</p>
+<div class="badge badge-lg tasting-note-spice">
+<span class="font-medium">Spice</span>
+</div>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-caramel">
+<span class="font-medium">caramel</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Distillers Edition" class="object-contain w-full h-full rounded-md" src="database_images/bottles/cragganmore_distillers_2023.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Cragganmore</h3>
+<h3 class="text-base">Distillers Edition</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-23" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-23" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-23" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-23" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-23" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-23" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-23" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-23" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-23" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-23" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Winey fruit and light smoke with a cocoa-vanilla finish.</p>
+<div class="badge badge-lg tasting-note-smoke">
+<span class="font-medium">smoke</span>
+</div>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-cocoa">
+<span class="font-medium">cocoa</span>
+</div>
+<div class="badge badge-lg tasting-note-fruit">
+<span class="font-medium">fruit</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Ensamble Mezcal" class="object-contain w-full h-full rounded-md" src="database_images/bottles/burrito_mezcal.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Burrito Fiestero</h3>
+<h3 class="text-base">Ensamble Mezcal</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-29" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-29" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-29" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-29" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-29" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-29" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-29" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-29" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-29" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-29" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">7/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Smoky and earthy with herbal spice and pepper.</p>
+<div class="badge badge-lg tasting-note-smoke">
+<span class="font-medium">smoke</span>
+</div>
+<div class="badge badge-lg tasting-note-earthy">
+<span class="font-medium">Earthy</span>
+</div>
+<div class="badge badge-lg tasting-note-herbal">
+<span class="font-medium">herbal</span>
+</div>
+<div class="badge badge-lg tasting-note-blackpepper">
+<span class="font-medium">black pepper</span>
+</div>
+</div>
+</div>
+</p>
+<!-- Close Button -->
+<label class="btn btn-sm btn-circle absolute right-2 top-2" for="user-modal-7">✕</label>
+</div>
+<!-- Overlay (click outside to close) -->
+<label class="modal-backdrop" for="user-modal-7"></label>
+</div>
+<!-- Modal -->
+</div>
+<div class="card w-full bg-base-100 shadow-lg">
+<!-- Trigger Button -->
+<label class="cursor-pointer" for="user-modal-8">
+<figure>
+<img alt="Sara" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Sara.png"/>
+</figure>
+<div class="card-body">
+<h2 class="card-title">Sara</h2>
+</div>
+</label>
+<input class="modal-toggle" id="user-modal-8" type="checkbox"/>
+<div class="modal">
+<div class="modal-box relative">
+<figure class="my-4">
+<img alt="Sara" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Sara.png"/>
+</figure>
+<!-- Modal Content -->
+<h3 class="font-bold text-lg">Sara</h3>
+<p class="py-4">
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="12 Year Old" class="object-contain w-full h-full rounded-md" src="database_images/bottles/cragganmore_12.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Cragganmore</h3>
+<h3 class="text-base">12 Year Old</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-11" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-11" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-11" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-11" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-11" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-11" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-11" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-11" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-11" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-11" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Floral nose with gentle smoke. Honeyed malt and oak on the palate.</p>
+<div class="badge badge-lg tasting-note-floral">
+<span class="font-medium">Floral</span>
+</div>
+<div class="badge badge-lg tasting-note-smoke">
+<span class="font-medium">smoke</span>
+</div>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Blasphemy" class="object-contain w-full h-full rounded-md" src="database_images/bottles/archie_rose_blasphemy.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Archie Rose</h3>
+<h3 class="text-base">Blasphemy</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-17" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-17" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-17" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-17" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-17" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-17" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-17" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-17" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-17" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-17" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Coffee and bitter chocolate lead. Dark toffee and oak support.</p>
+<div class="badge badge-lg tasting-note-coffee">
+<span class="font-medium">coffee</span>
+</div>
+<div class="badge badge-lg tasting-note-bitterchocolate">
+<span class="font-medium">bitter chocolate</span>
+</div>
+<div class="badge badge-lg tasting-note-toffee">
+<span class="font-medium">toffee</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Special Reserve" class="object-contain w-full h-full rounded-md" src="database_images/bottles/blantons_special_reserve.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Blanton's</h3>
+<h3 class="text-base">Special Reserve</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-21" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-21" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-21" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-21" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-21" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-21" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-21" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-21" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-21" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-21" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">7/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Soft citrus and vanilla with a light spice finish.</p>
+<div class="badge badge-lg tasting-note-vanilla">
+<span class="font-medium">vanilla</span>
+</div>
+<div class="badge badge-lg tasting-note-cinnamon">
+<span class="font-medium">cinnamon</span>
+</div>
+<div class="badge badge-lg tasting-note-apple">
+<span class="font-medium">apple</span>
+</div>
+<div class="badge badge-lg tasting-note-oak">
+<span class="font-medium">oak</span>
+</div>
+</div>
+</div>
+<div class="collapse collapse-arrow review-component">
+<input class="peer" type="checkbox"/> <!-- Controls the dropdown -->
+<!-- Visible Content -->
+<div class="grid grid-cols-2 items-center space-x-4 collapse-title text-lg font-medium">
+<div class="grid grid-cols-2">
+<!-- Bottle Image -->
+<div class="w-16 h-16">
+<img alt="Art Gin" class="object-contain w-full h-full rounded-md" src="database_images/bottles/ink_art_gin.jpg"/>
+</div>
+<!-- Bottle Name -->
+<div>
+<h3 class="font-bold text-lg">Ink</h3>
+<h3 class="text-base">Art Gin</h3>
+</div>
+</div>
+<!-- Score Visualization -->
+<div class="text-sm">
+<div class="rating flex">
+<div class="rating">
+<!-- Render 10 stars, some filled, some empty -->
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-27" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-27" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-27" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-27" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-27" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-27" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-27" type="radio"/>
+<input checked="" class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-27" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-27" type="radio"/>
+<input class="mask mask-star-2 bg-yellow-400 scale-50" disabled="" name="rating-27" type="radio"/>
+</div>
+<span class="text-sm font-medium text-gray-700">8/10</span>
+</div>
+        2026-01-12
+      </div>
+</div>
+<!-- Hidden Content (Revealed on Click) -->
+<div class="collapse-content mt-2 border-b-2 border-x-2 border-gray-900 rounded-b-3xl">
+<!-- Review Details -->
+<p class="text-md mb-2">Floral and citrus-forward with a clean, herbal finish.</p>
+<div class="badge badge-lg tasting-note-floral">
+<span class="font-medium">Floral</span>
+</div>
+<div class="badge badge-lg tasting-note-lemon">
+<span class="font-medium">Lemon</span>
+</div>
+<div class="badge badge-lg tasting-note-orange">
+<span class="font-medium">Orange</span>
+</div>
+<div class="badge badge-lg tasting-note-herbal">
+<span class="font-medium">herbal</span>
+</div>
+</div>
+</div>
+</p>
+<!-- Close Button -->
+<label class="btn btn-sm btn-circle absolute right-2 top-2" for="user-modal-8">✕</label>
+</div>
+<!-- Overlay (click outside to close) -->
+<label class="modal-backdrop" for="user-modal-8"></label>
+</div>
+<!-- Modal -->
+</div>
+</div>
+</div>
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[9999]" id="loading-overlay">
+<div class="text-white text-3xl">Processing...</div>
+</div>
+</body>
+<script>
+  function showLoadingOverlay() {
+    document.getElementById("loading-overlay").classList.remove("hidden");
+  }
+
+  function hideLoadingOverlay() {
+    document.getElementById("loading-overlay").classList.add("hidden");
+  }
+
+  function showAlert(message, type = "info", timeout = 3000) {
+    // Create the alert element
+    const alert = document.createElement("div");
+    alert.className = `alert alert-${type} shadow-lg`;
+    alert.role = "alert"
+
+    // Add alert content
+    alert.innerHTML = `
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+          ${
+            type === "success"
+              ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />'
+              : type === "error"
+              ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />'
+              : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z" />'
+          }
+        </svg>
+        <span>${message}</span>
+      </div>
+    `;
+
+    // Add alert to the container
+    const alertContainer = document.getElementById("alert-container");
+    alertContainer.appendChild(alert);
+
+    // Automatically remove the alert after the timeout
+    setTimeout(() => {
+      alert.remove();
+    }, timeout);
+  }
+</script>
+</html>

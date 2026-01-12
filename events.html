@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="static/css/tailwind.output.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<title>Inventory - Bar Companion</title>
+<style>
+
+  /* Tier 3 - Dark Red */
+  .tasting-note-fruity {
+      background-color: #5e1f1f;
+      color: #ffffff;
+  }
+
+  /* Tier 2 - Medium Red */
+  .tasting-note-cookedfruit,
+  .tasting-note-berry,
+  .tasting-note-tropical,
+  .tasting-note-stonefruit,
+  .tasting-note-fruit {
+      background-color: #8c3434;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Red */
+  .tasting-note-marmalade,
+  .tasting-note-jam,
+  .tasting-note-applepie,
+  .tasting-note-raspberry,
+  .tasting-note-blackberry,
+  .tasting-note-blueberry,
+  .tasting-note-strawberry,
+  .tasting-note-orange,
+  .tasting-note-lemon,
+  .tasting-note-orangepeel,
+  .tasting-note-coconut,
+  .tasting-note-banana,
+  .tasting-note-plum,
+  .tasting-note-peach,
+  .tasting-note-cherry,
+  .tasting-note-apricot,
+  .tasting-note-raisin,
+  .tasting-note-grape,
+  .tasting-note-fig,
+  .tasting-note-apple {
+      background-color: #e5a3a3;
+      color: #333333;
+  }
+
+  /* Greens Theme */
+
+  /* Tier 3 - Dark Green */
+  .tasting-note-spice {
+      background-color: #1f4d3a;
+      color: #ffffff;
+  }
+
+  /* Tier 2 - Medium Green */
+  .tasting-note-bakingspice,
+  .tasting-note-savoryspice {
+      background-color: #347d5e;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Green */
+  .tasting-note-nutmeg,
+  .tasting-note-clove,
+  .tasting-note-coriander,
+  .tasting-note-cinnamon,
+  .tasting-note-staranise,
+  .tasting-note-whitepepper,
+  .tasting-note-spearmint,
+  .tasting-note-herbal,
+  .tasting-note-fennel,
+  .tasting-note-dill,
+  .tasting-note-blackpepper {
+      background-color: #a3d5c1;
+      color: #333333;
+  }
+
+
+  /* Blues Theme */
+
+  /* Tier 3 - Dark Blue */
+  .tasting-note-sweet {
+      background-color: #1f3a5e;
+      color: #ffffff;
+  }
+
+  /* Tier 2 - Medium Blue */
+  .tasting-note-vanillas,
+  .tasting-note-soda,
+  .tasting-note-dessert,
+  .tasting-note-chocolates {
+      background-color: #345e8c;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Blue */
+  .tasting-note-vanilla,
+  .tasting-note-custard,
+  .tasting-note-cremebrulee,
+  .tasting-note-cherrysoda,
+  .tasting-note-cremesoda,
+  .tasting-note-rootbeer,
+  .tasting-note-cola,
+  .tasting-note-brownsugar,
+  .tasting-note-butterscotch,
+  .tasting-note-caramel,
+  .tasting-note-grahamcracker,
+  .tasting-note-honey,
+  .tasting-note-licorice,
+  .tasting-note-maplesyrup,
+  .tasting-note-marshmellow,
+  .tasting-note-molasses,
+  .tasting-note-toffee,
+  .tasting-note-bitterchocolate,
+  .tasting-note-milkchocolate,
+  .tasting-note-chocolatemocha,
+  .tasting-note-chocolatemilk {
+      background-color: #a3c1e5;
+      color: #333333;
+  }
+
+
+  /* Yellows Theme */
+
+  /* Tier 3 - Dark Yellow */
+  .tasting-note-grain {
+      background-color: #7a5e1f;
+      color: #ffffff;
+  }
+
+  /* Tier 2 - Medium Yellow */
+  .tasting-note-corn,
+  .tasting-note-malt,
+  .tasting-note-rye,
+  .tasting-note-bread {
+      background-color: #b38b34;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Yellow */
+  .tasting-note-cereal,
+  .tasting-note-cocoa,
+  .tasting-note-bread,
+  .tasting-note-buckwheatpancakes {
+      background-color: #e5c585;
+      color: #333333;
+  }
+
+  /* Browns Theme */
+
+  /* Tier 3 - Dark Brown */
+  .tasting-note-wood {
+      background-color: #5a4033;
+      color: #ffffff;
+  }
+
+  /* Tier 2 - Medium Brown */
+  .tasting-note-oak,
+  .tasting-note-pine,
+  .tasting-note-nut,
+  .tasting-note-earthy {
+      background-color: #8c5b44;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Brown */
+  .tasting-note-smokyoak,
+  .tasting-note-sweetoak,
+  .tasting-note-toastedoak,
+  .tasting-note-cedar,
+  .tasting-note-almond,
+  .tasting-note-hazelnut,
+  .tasting-note-peanut,
+  .tasting-note-pecan,
+  .tasting-note-walnut,
+  .tasting-note-coffee,
+  .tasting-note-leather,
+  .tasting-note-tobacco,
+  .tasting-note-peat,
+  .tasting-note-smoke {
+      background-color: #d4b7a3;
+      color: #333333;
+  }
+
+
+  /* Pinks Theme */
+
+  /* Tier 3 - Dark Pink */
+  .tasting-note-floral {
+      background-color: #7a244f;
+      color: #ffffff;
+  }
+
+  /* Tier 1 - Light Pink */
+  .tasting-note-rose,
+  .tasting-note-heather,
+  .tasting-note-violet {
+      background-color: #e6a5c1;
+      color: #333333;
+  }
+  </style>
+</head>
+<body class="bg-base h-screen">
+<!-- Navigation Bar -->
+<nav class="bg-primary text-white p-4 flex items-center justify-between">
+<!-- Left-aligned Screensaver Button -->
+<div class="flex items-center">
+<a class="hover:underline flex items-center" href="index.html">
+<i class="fas fa-tv text-3xl"></i>
+</a>
+</div>
+<!-- Centered Navigation Links -->
+<ul class="flex justify-center space-x-6">
+<li>
+<a class="hover:underline flex items-center" href="home.html">
+<i class="fas fa-home text-3xl"></i>
+</a>
+</li>
+<li>
+<a class="hover:underline flex items-center" href="inventory.html">
+<i class="fas fa-boxes text-3xl"></i>
+</a>
+</li>
+<li>
+<a class="hover:underline flex items-center" href="users.html">
+<i class="fas fa-users text-3xl"></i>
+</a>
+</li>
+<li>
+<a class="hover:underline flex items-center" href="events.html">
+<i class="fas fa-calendar-days text-3xl"></i>
+</a>
+</li>
+</ul>
+<!-- Placeholder for Right Alignment -->
+<div></div>
+</nav>
+<div class="absolute fixed top-4 right-4 space-y-4 z-[9999]" id="alert-container"></div>
+<!-- Main Content -->
+<div class="container mx-auto py-8">
+<h1 class="text-3xl font-bold mb-6">Events</h1>
+<div class="flex">
+<div class="border p-1">
+<label class="btn btn-primary mr-2" for="add-event-modal">Add event + </label>
+</div>
+<!-- Add Event Modal -->
+<input class="modal-toggle" id="add-event-modal" type="checkbox"/>
+<div class="modal">
+<div class="modal-box">
+<h3 class="font-bold text-lg">Add a New Event</h3>
+<form class="space-y-4" id="addEventForm">
+<!-- Event Name -->
+<div class="form-control">
+<label class="label">
+<span class="label-text">Event Name</span>
+</label>
+<input class="input input-bordered" name="name" required="" type="text"/>
+</div>
+<!-- Event Date -->
+<div class="form-control">
+<label class="label">
+<span class="label-text">Event Date</span>
+</label>
+<input class="input input-bordered" name="event_date" required="" type="date"/>
+</div>
+<!-- Submit Button -->
+<div class="modal-action">
+<button class="btn btn-primary" type="submit">Add Event</button>
+<label class="btn" for="add-event-modal">Cancel</label>
+</div>
+</form>
+</div>
+</div>
+<script>
+
+document.getElementById("addEventForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  // Collect form data
+  const formData = new FormData(e.target);
+  const jsonData = {};
+
+  // Convert form data to JSON
+  formData.forEach((value, key) => {
+    jsonData[key] = value; // Directly map form data to JSON
+    });
+
+
+    await sendEventRequest(jsonData);
+
+});
+
+// Function to send POST request
+async function sendEventRequest(data) {
+  try {
+    showLoadingOverlay();
+    const response = await fetch("/api/add_event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      showAlert("Event added successfully!", "success");
+      document.getElementById("addEventForm").reset(); // Reset the form
+      document.getElementById("add-event-modal").checked = false; // Close the modal
+      location.reload();
+    } else {
+      showAlert(result.error || "Failed to add the event.", "error");
+    }
+  } catch (error) {
+    showAlert("An error occurred while adding the event.", "error");
+    console.error(error);
+  }
+  hideLoadingOverlay();
+}
+</script>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<div class="card w-full bg-base-100 shadow-lg">
+<!-- Trigger Button -->
+<label class="cursor-pointer" for="event-modal-3">
+<div class="card-body">
+<h2 class="card-title">Birthday Party!</h2>
+<h4>2026-01-12</h4>
+</div>
+</label>
+<script>console.log("[{&#39;id&#39;: 4, &#39;name&#39;: &#39;Kevin&#39;, &#39;image_path&#39;: &#39;Kevin.png&#39;}, {&#39;id&#39;: 5, &#39;name&#39;: &#39;Bill&#39;, &#39;image_path&#39;: &#39;Bill.png&#39;}, {&#39;id&#39;: 1, &#39;name&#39;: &#39;Ethan&#39;, &#39;image_path&#39;: &#39;Ethan.png&#39;}]");</script>
+<!-- Modal -->
+<input class="modal-toggle" id="event-modal-3" type="checkbox"/>
+<div class="modal">
+<div class="modal-box relative">
+<!-- Modal Content -->
+<h3 class="font-bold text-lg">Birthday Party!</h3>
+<h4 class="font-bold text-lg">2026-01-12</h4>
+<figure class="my-4">
+<div id="qrcode-3"></div>
+</figure>
+<script>
+      document.addEventListener("DOMContentLoaded", generateQRCode);
+  
+      function generateQRCode() {
+        const url = `/event?id=3&version=client`;
+        const qrCodeContainer = document.getElementById("qrcode-3");
+  
+        // Clear any existing QR code
+        qrCodeContainer.innerHTML = "";
+  
+        // Generate QR code
+        new QRCode(qrCodeContainer, {
+          text: url,
+          width: 200,  
+          height: 200, 
+        });
+      }
+    </script>
+<div class="grid grid-cols-2">
+<div class="btn btn-primary mr-2" onclick="window.location.href='/event?id=3&amp;version=console'">Event Console</div>
+<div class="btn btn-primary mr-2" onclick="window.location.href='/event?id=3&amp;version=client'">Event Client</div>
+</div>
+<h3 class="font-bold text-lg mt-4">Bottles</h3>
+<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
+<!-- Bottle Image -->
+<img alt="Blanton's - Special Reserve" class="w-32 h-32 object-contain rounded-md" src="database_images/bottles/blantons_special_reserve.jpg"/>
+<!-- Bottle Details -->
+<div>
+<h3 class="font-bold text-lg">Blanton's - Special Reserve</h3>
+</div>
+</div>
+<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
+<!-- Bottle Image -->
+<img alt="Blanton's - Private Reserve" class="w-32 h-32 object-contain rounded-md" src="database_images/bottles/blantons_private_reserve.jpg"/>
+<!-- Bottle Details -->
+<div>
+<h3 class="font-bold text-lg">Blanton's - Private Reserve</h3>
+</div>
+</div>
+<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
+<!-- Bottle Image -->
+<img alt="Blanton's - Gold" class="w-32 h-32 object-contain rounded-md" src="database_images/bottles/blantons_gold.jpg"/>
+<!-- Bottle Details -->
+<div>
+<h3 class="font-bold text-lg">Blanton's - Gold</h3>
+</div>
+</div>
+<h3 class="font-bold text-lg mt-4">Participants</h3>
+<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
+<!-- user Image -->
+<img alt=" - Kevin" class="w-32 h-32 object-contain rounded-md" src="database_images/users/Kevin.png"/>
+<!-- user Details -->
+<div>
+<h3 class="font-bold text-lg">Kevin</h3>
+</div>
+</div>
+<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
+<!-- user Image -->
+<img alt=" - Bill" class="w-32 h-32 object-contain rounded-md" src="database_images/users/Bill.png"/>
+<!-- user Details -->
+<div>
+<h3 class="font-bold text-lg">Bill</h3>
+</div>
+</div>
+<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
+<!-- user Image -->
+<img alt=" - Ethan" class="w-32 h-32 object-contain rounded-md" src="database_images/users/Ethan.png"/>
+<!-- user Details -->
+<div>
+<h3 class="font-bold text-lg">Ethan</h3>
+</div>
+</div>
+<!-- Close Button -->
+<label class="btn btn-sm btn-circle absolute right-2 top-2" for="event-modal-3">✕</label>
+</div>
+<!-- Overlay (click outside to close) -->
+<label class="modal-backdrop" for="event-modal-3"></label>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</div>
+</div>
+</div>
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[9999]" id="loading-overlay">
+<div class="text-white text-3xl">Processing...</div>
+</div>
+</body>
+<script>
+  function showLoadingOverlay() {
+    document.getElementById("loading-overlay").classList.remove("hidden");
+  }
+
+  function hideLoadingOverlay() {
+    document.getElementById("loading-overlay").classList.add("hidden");
+  }
+
+  function showAlert(message, type = "info", timeout = 3000) {
+    // Create the alert element
+    const alert = document.createElement("div");
+    alert.className = `alert alert-${type} shadow-lg`;
+    alert.role = "alert"
+
+    // Add alert content
+    alert.innerHTML = `
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+          ${
+            type === "success"
+              ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />'
+              : type === "error"
+              ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />'
+              : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z" />'
+          }
+        </svg>
+        <span>${message}</span>
+      </div>
+    `;
+
+    // Add alert to the container
+    const alertContainer = document.getElementById("alert-container");
+    alertContainer.appendChild(alert);
+
+    // Automatically remove the alert after the timeout
+    setTimeout(() => {
+      alert.remove();
+    }, timeout);
+  }
+</script>
+</html>
