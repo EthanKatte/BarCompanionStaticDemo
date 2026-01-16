@@ -6,8 +6,9 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="static/css/tailwind.output.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-<title>Inventory - Bar Companion</title>
+<title>Events - John's bahr</title>
 <style>
+  @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap");
 
   /* Tier 3 - Dark Red */
   .tasting-note-fruity {
@@ -204,6 +205,343 @@
       background-color: #e6a5c1;
       color: #333333;
   }
+
+  :root {
+      --catalog-ink: #1f2a2e;
+      --catalog-muted: #5c6a6a;
+      --catalog-panel: #f9f6f1;
+      --catalog-panel-strong: #f1e7db;
+      --catalog-accent: #c79257;
+      --catalog-accent-strong: #9c4e1b;
+      --catalog-border: rgba(31, 42, 46, 0.12);
+  }
+
+  .catalog-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      padding: clamp(1.5rem, 3vw, 2.75rem);
+      background:
+          radial-gradient(circle at top right, rgba(199, 146, 87, 0.22), transparent 55%),
+          radial-gradient(circle at 10% 20%, rgba(31, 42, 46, 0.08), transparent 50%),
+          linear-gradient(135deg, #fdfbf7 0%, #f3eee6 100%);
+      border: 1px solid var(--catalog-border);
+  }
+
+  .catalog-orb {
+      position: absolute;
+      border-radius: 999px;
+      opacity: 0.7;
+      animation: catalog-float 12s ease-in-out infinite;
+      pointer-events: none;
+  }
+
+  .catalog-orb--a {
+      width: 260px;
+      height: 260px;
+      top: -120px;
+      right: -80px;
+      background: radial-gradient(circle, rgba(156, 78, 27, 0.28), transparent 65%);
+  }
+
+  .catalog-orb--b {
+      width: 320px;
+      height: 320px;
+      bottom: -180px;
+      left: -140px;
+      animation-delay: 4s;
+      background: radial-gradient(circle, rgba(199, 146, 87, 0.22), transparent 70%);
+  }
+
+  .catalog-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+  }
+
+  .catalog-hero {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+  }
+
+  .catalog-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: clamp(2.4rem, 3.2vw, 3.2rem);
+      color: var(--catalog-ink);
+      margin: 0;
+  }
+
+  .catalog-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--catalog-accent-strong);
+      margin-bottom: 0.75rem;
+  }
+
+  .catalog-subtitle {
+      font-family: "Source Sans 3", "Segoe UI", sans-serif;
+      color: var(--catalog-muted);
+      max-width: 36rem;
+      margin-top: 0.5rem;
+  }
+
+  .catalog-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-self: flex-start;
+  }
+
+  .catalog-btn {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+  }
+
+  .catalog-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (min-width: 1280px) {
+  .catalog-stats {
+        grid-template-columns: repeat(4, minmax(140px, 1fr));
+    }
+  }
+
+  .catalog-stat {
+      background: var(--catalog-panel);
+      border-radius: 16px;
+      border: 1px solid var(--catalog-border);
+      padding: 0.75rem 1rem;
+  }
+
+
+
+  .catalog-stat__label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--catalog-muted);
+  }
+
+  .catalog-stat__value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--catalog-ink);
+  }
+
+  .catalog-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      align-items: end;
+      background: var(--catalog-panel);
+      border-radius: 20px;
+      border: 1px solid var(--catalog-border);
+      padding: 1.25rem;
+  }
+
+  .catalog-search__label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--catalog-ink);
+      margin-bottom: 0.5rem;
+  }
+
+  .catalog-search__input {
+      width: 100%;
+  }
+
+  .catalog-search__meta {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--catalog-muted);
+  }
+
+  .catalog-controls__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+  }
+
+  .catalog-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: var(--catalog-ink);
+  }
+
+  .catalog-filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+  }
+
+  .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+  }
+
+  .catalog-card {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid var(--catalog-border);
+      box-shadow: 0 18px 40px rgba(18, 26, 32, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .catalog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 26px 50px rgba(18, 26, 32, 0.14);
+  }
+
+  .catalog-card.is-unavailable {
+      opacity: 0.68;
+  }
+
+  .catalog-card__click {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+  }
+
+  .catalog-card__media {
+      position: relative;
+      background: linear-gradient(120deg, rgba(199, 146, 87, 0.2), rgba(255, 255, 255, 0.9));
+      border-radius: 20px 20px 0 0;
+      padding: 1.5rem 1rem 1rem;
+  }
+
+  .catalog-card__media img {
+      width: 100%;
+      height: 210px;
+      object-fit: contain;
+  }
+
+  .catalog-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: #fff;
+  }
+
+  .catalog-badge--available {
+      background: var(--catalog-accent-strong);
+  }
+
+  .catalog-badge--unavailable {
+      background: #6f7a7a;
+  }
+
+  .catalog-card__body {
+      padding: 1.25rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+  }
+
+  .catalog-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+  }
+
+  .catalog-card__brand {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.2rem;
+      margin: 0;
+      color: var(--catalog-ink);
+  }
+
+  .catalog-card__abv {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--catalog-muted);
+  }
+
+  .catalog-card__name {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--catalog-ink);
+  }
+
+  .catalog-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+  }
+
+  .catalog-chip {
+      background: var(--catalog-panel-strong);
+      color: var(--catalog-ink);
+      border-radius: 999px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+  }
+
+  .catalog-chip--muted {
+      background: #ffffff;
+      border: 1px solid var(--catalog-border);
+  }
+
+  @keyframes catalog-float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(12px); }
+      100% { transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+      .catalog-hero {
+          flex-direction: column;
+          align-items: flex-start;
+      }
+  }
+
+  @media (max-width: 640px) {
+      .catalog-actions {
+          width: 100%;
+      }
+
+      .catalog-actions .btn {
+          flex: 1;
+      }
+
+      .catalog-controls {
+          grid-template-columns: 1fr;
+      }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+      .catalog-orb {
+          animation: none;
+      }
+
+      .catalog-card {
+          transition: none;
+      }
+  }
   </style>
 </head>
 <body class="bg-base h-screen">
@@ -244,10 +582,35 @@
 <div class="absolute fixed top-4 right-4 space-y-4 z-[9999]" id="alert-container"></div>
 <!-- Main Content -->
 <div class="container mx-auto py-8">
-<h1 class="text-3xl font-bold mb-6">Events</h1>
-<div class="flex">
-<div class="border p-1">
-<label class="btn btn-primary mr-2" for="add-event-modal">Add event + </label>
+<div class="catalog-shell">
+<div class="catalog-orb catalog-orb--a"></div>
+<div class="catalog-orb catalog-orb--b"></div>
+<div class="catalog-content">
+<div class="catalog-hero">
+<div>
+<p class="catalog-eyebrow">Tasting calendar</p>
+<h1 class="catalog-title">Events</h1>
+<p class="catalog-subtitle">
+          Plan tastings, manage guest lists, and track the bottles poured at each event.
+        </p>
+<div class="catalog-stats">
+<div class="catalog-stat">
+<span class="catalog-stat__label">Total events</span>
+<span class="catalog-stat__value">1</span>
+</div>
+<div class="catalog-stat">
+<span class="catalog-stat__label">Guests invited</span>
+<span class="catalog-stat__value">3</span>
+</div>
+<div class="catalog-stat">
+<span class="catalog-stat__label">Bottles poured</span>
+<span class="catalog-stat__value">3</span>
+</div>
+</div>
+</div>
+<div class="catalog-actions">
+<label class="btn btn-primary catalog-btn" for="add-event-modal">Add Event</label>
+</div>
 </div>
 <!-- Add Event Modal -->
 <input class="modal-toggle" id="add-event-modal" type="checkbox"/>
@@ -324,18 +687,45 @@ async function sendEventRequest(data) {
   hideLoadingOverlay();
 }
 </script>
+<div class="catalog-controls">
+<div class="catalog-search">
+<label class="catalog-search__label" for="event-search">Search events</label>
+<input class="input input-bordered catalog-search__input" id="event-search" placeholder="Search by name or date" type="text"/>
+<div class="catalog-search__meta">
+<span id="event-count">1 events</span>
 </div>
-<div class="grid grid-cols-3 gap-6">
-<div class="card w-full bg-base-100 shadow-lg">
-<!-- Trigger Button -->
-<label class="cursor-pointer" for="event-modal-3">
-<div class="card-body">
-<h2 class="card-title">Birthday Party!</h2>
-<h4>2026-01-12</h4>
+</div>
+<div class="catalog-controls__actions">
+<label class="catalog-toggle">
+<input class="checkbox checkbox-primary" id="events-with-guests" type="checkbox"/>
+<span>Only with guests</span>
+</label>
+<label class="catalog-toggle">
+<input class="checkbox checkbox-primary" id="events-with-bottles" type="checkbox"/>
+<span>Only with bottles</span>
+</label>
+<div class="catalog-filter-group">
+<button class="btn btn-tertiary" onclick="clearEventFilters()" type="button">
+            Reset filters
+          </button>
+</div>
+</div>
+</div>
+<div class="catalog-grid" id="event-grid">
+<div class="catalog-card" data-has-bottles="1" data-has-guests="1" data-search="Birthday Party! 2026-01-12">
+<label class="catalog-card__click" for="event-modal-3">
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Birthday Party!</h2>
+</div>
+<p class="catalog-card__name">2026-01-12</p>
+<div class="catalog-card__meta">
+<span class="catalog-chip">3 guests</span>
+<span class="catalog-chip catalog-chip--muted">3 bottles</span>
+</div>
 </div>
 </label>
-<script>console.log("[{&#39;id&#39;: 4, &#39;name&#39;: &#39;Kevin&#39;, &#39;image_path&#39;: &#39;Kevin.png&#39;}, {&#39;id&#39;: 5, &#39;name&#39;: &#39;Bill&#39;, &#39;image_path&#39;: &#39;Bill.png&#39;}, {&#39;id&#39;: 1, &#39;name&#39;: &#39;Ethan&#39;, &#39;image_path&#39;: &#39;Ethan.png&#39;}]");</script>
-<!-- Modal -->
+</div>
 <input class="modal-toggle" id="event-modal-3" type="checkbox"/>
 <div class="modal">
 <div class="modal-box relative">
@@ -426,6 +816,72 @@ async function sendEventRequest(data) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </div>
 </div>
+</div>
+<script>
+  function applyEventFilters() {
+    const searchInput = document.getElementById("event-search");
+    const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+    const onlyWithGuests = document.getElementById("events-with-guests")?.checked;
+    const onlyWithBottles = document.getElementById("events-with-bottles")?.checked;
+    const cards = document.querySelectorAll("#event-grid .catalog-card");
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const searchText = (card.dataset.search || "").toLowerCase();
+      const hasGuests = card.dataset.hasGuests === "1";
+      const hasBottles = card.dataset.hasBottles === "1";
+      const matchesSearch = !query || searchText.includes(query);
+      const matchesGuests = !onlyWithGuests || hasGuests;
+      const matchesBottles = !onlyWithBottles || hasBottles;
+      const shouldShow = matchesSearch && matchesGuests && matchesBottles;
+
+      card.classList.toggle("hidden", !shouldShow);
+      if (shouldShow) {
+        visibleCount += 1;
+      }
+    });
+
+    const countEl = document.getElementById("event-count");
+    if (countEl) {
+      countEl.textContent = `${visibleCount} events`;
+    }
+  }
+
+  function clearEventFilters() {
+    const searchInput = document.getElementById("event-search");
+    const guestsToggle = document.getElementById("events-with-guests");
+    const bottlesToggle = document.getElementById("events-with-bottles");
+    if (searchInput) {
+      searchInput.value = "";
+    }
+    if (guestsToggle) {
+      guestsToggle.checked = false;
+    }
+    if (bottlesToggle) {
+      bottlesToggle.checked = false;
+    }
+    applyEventFilters();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("event-search");
+    if (searchInput) {
+      searchInput.addEventListener("input", applyEventFilters);
+    }
+
+    const guestsToggle = document.getElementById("events-with-guests");
+    if (guestsToggle) {
+      guestsToggle.addEventListener("change", applyEventFilters);
+    }
+
+    const bottlesToggle = document.getElementById("events-with-bottles");
+    if (bottlesToggle) {
+      bottlesToggle.addEventListener("change", applyEventFilters);
+    }
+
+    applyEventFilters();
+  });
+</script>
 </div>
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[9999]" id="loading-overlay">
 <div class="text-white text-3xl">Processing...</div>

@@ -8,6 +8,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
 <title>Users - John's bahr</title>
 <style>
+  @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap");
 
   /* Tier 3 - Dark Red */
   .tasting-note-fruity {
@@ -204,6 +205,343 @@
       background-color: #e6a5c1;
       color: #333333;
   }
+
+  :root {
+      --catalog-ink: #1f2a2e;
+      --catalog-muted: #5c6a6a;
+      --catalog-panel: #f9f6f1;
+      --catalog-panel-strong: #f1e7db;
+      --catalog-accent: #c79257;
+      --catalog-accent-strong: #9c4e1b;
+      --catalog-border: rgba(31, 42, 46, 0.12);
+  }
+
+  .catalog-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      padding: clamp(1.5rem, 3vw, 2.75rem);
+      background:
+          radial-gradient(circle at top right, rgba(199, 146, 87, 0.22), transparent 55%),
+          radial-gradient(circle at 10% 20%, rgba(31, 42, 46, 0.08), transparent 50%),
+          linear-gradient(135deg, #fdfbf7 0%, #f3eee6 100%);
+      border: 1px solid var(--catalog-border);
+  }
+
+  .catalog-orb {
+      position: absolute;
+      border-radius: 999px;
+      opacity: 0.7;
+      animation: catalog-float 12s ease-in-out infinite;
+      pointer-events: none;
+  }
+
+  .catalog-orb--a {
+      width: 260px;
+      height: 260px;
+      top: -120px;
+      right: -80px;
+      background: radial-gradient(circle, rgba(156, 78, 27, 0.28), transparent 65%);
+  }
+
+  .catalog-orb--b {
+      width: 320px;
+      height: 320px;
+      bottom: -180px;
+      left: -140px;
+      animation-delay: 4s;
+      background: radial-gradient(circle, rgba(199, 146, 87, 0.22), transparent 70%);
+  }
+
+  .catalog-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+  }
+
+  .catalog-hero {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+  }
+
+  .catalog-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: clamp(2.4rem, 3.2vw, 3.2rem);
+      color: var(--catalog-ink);
+      margin: 0;
+  }
+
+  .catalog-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--catalog-accent-strong);
+      margin-bottom: 0.75rem;
+  }
+
+  .catalog-subtitle {
+      font-family: "Source Sans 3", "Segoe UI", sans-serif;
+      color: var(--catalog-muted);
+      max-width: 36rem;
+      margin-top: 0.5rem;
+  }
+
+  .catalog-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-self: flex-start;
+  }
+
+  .catalog-btn {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+  }
+
+  .catalog-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (min-width: 1280px) {
+  .catalog-stats {
+        grid-template-columns: repeat(4, minmax(140px, 1fr));
+    }
+  }
+
+  .catalog-stat {
+      background: var(--catalog-panel);
+      border-radius: 16px;
+      border: 1px solid var(--catalog-border);
+      padding: 0.75rem 1rem;
+  }
+
+
+
+  .catalog-stat__label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--catalog-muted);
+  }
+
+  .catalog-stat__value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--catalog-ink);
+  }
+
+  .catalog-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      align-items: end;
+      background: var(--catalog-panel);
+      border-radius: 20px;
+      border: 1px solid var(--catalog-border);
+      padding: 1.25rem;
+  }
+
+  .catalog-search__label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--catalog-ink);
+      margin-bottom: 0.5rem;
+  }
+
+  .catalog-search__input {
+      width: 100%;
+  }
+
+  .catalog-search__meta {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--catalog-muted);
+  }
+
+  .catalog-controls__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+  }
+
+  .catalog-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: var(--catalog-ink);
+  }
+
+  .catalog-filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+  }
+
+  .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+  }
+
+  .catalog-card {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid var(--catalog-border);
+      box-shadow: 0 18px 40px rgba(18, 26, 32, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .catalog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 26px 50px rgba(18, 26, 32, 0.14);
+  }
+
+  .catalog-card.is-unavailable {
+      opacity: 0.68;
+  }
+
+  .catalog-card__click {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+  }
+
+  .catalog-card__media {
+      position: relative;
+      background: linear-gradient(120deg, rgba(199, 146, 87, 0.2), rgba(255, 255, 255, 0.9));
+      border-radius: 20px 20px 0 0;
+      padding: 1.5rem 1rem 1rem;
+  }
+
+  .catalog-card__media img {
+      width: 100%;
+      height: 210px;
+      object-fit: contain;
+  }
+
+  .catalog-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: #fff;
+  }
+
+  .catalog-badge--available {
+      background: var(--catalog-accent-strong);
+  }
+
+  .catalog-badge--unavailable {
+      background: #6f7a7a;
+  }
+
+  .catalog-card__body {
+      padding: 1.25rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+  }
+
+  .catalog-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+  }
+
+  .catalog-card__brand {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.2rem;
+      margin: 0;
+      color: var(--catalog-ink);
+  }
+
+  .catalog-card__abv {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--catalog-muted);
+  }
+
+  .catalog-card__name {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--catalog-ink);
+  }
+
+  .catalog-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+  }
+
+  .catalog-chip {
+      background: var(--catalog-panel-strong);
+      color: var(--catalog-ink);
+      border-radius: 999px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+  }
+
+  .catalog-chip--muted {
+      background: #ffffff;
+      border: 1px solid var(--catalog-border);
+  }
+
+  @keyframes catalog-float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(12px); }
+      100% { transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+      .catalog-hero {
+          flex-direction: column;
+          align-items: flex-start;
+      }
+  }
+
+  @media (max-width: 640px) {
+      .catalog-actions {
+          width: 100%;
+      }
+
+      .catalog-actions .btn {
+          flex: 1;
+      }
+
+      .catalog-controls {
+          grid-template-columns: 1fr;
+      }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+      .catalog-orb {
+          animation: none;
+      }
+
+      .catalog-card {
+          transition: none;
+      }
+  }
   </style>
 </head>
 <body class="bg-base h-screen">
@@ -244,10 +582,35 @@
 <div class="absolute fixed top-4 right-4 space-y-4 z-[9999]" id="alert-container"></div>
 <!-- Main Content -->
 <div class="container mx-auto py-8">
-<h1 class="text-3xl font-bold mb-6">Users</h1>
-<div class="flex">
-<div class="border p-1">
-<label class="btn btn-primary mr-2" for="add-user-modal">Add User + </label>
+<div class="catalog-shell">
+<div class="catalog-orb catalog-orb--a"></div>
+<div class="catalog-orb catalog-orb--b"></div>
+<div class="catalog-content">
+<div class="catalog-hero">
+<div>
+<p class="catalog-eyebrow">Community roster</p>
+<h1 class="catalog-title">Users</h1>
+<p class="catalog-subtitle">
+          Keep track of tasters, their pours, and the notes they have left behind.
+        </p>
+<div class="catalog-stats">
+<div class="catalog-stat">
+<span class="catalog-stat__label">Total users</span>
+<span class="catalog-stat__value">6</span>
+</div>
+<div class="catalog-stat">
+<span class="catalog-stat__label">With reviews</span>
+<span class="catalog-stat__value">6</span>
+</div>
+<div class="catalog-stat">
+<span class="catalog-stat__label">Total reviews</span>
+<span class="catalog-stat__value">28</span>
+</div>
+</div>
+</div>
+<div class="catalog-actions">
+<label class="btn btn-primary catalog-btn" for="add-user-modal">Add User</label>
+</div>
 </div>
 <input class="modal-toggle" id="add-user-modal" type="checkbox"/>
 <div class="modal">
@@ -338,18 +701,42 @@
     });
   }
 </script>
+<div class="catalog-controls">
+<div class="catalog-search">
+<label class="catalog-search__label" for="user-search">Search users</label>
+<input class="input input-bordered catalog-search__input" id="user-search" placeholder="Search by name" type="text"/>
+<div class="catalog-search__meta">
+<span id="user-count">6 users</span>
 </div>
-<div class="grid grid-cols-3 gap-6">
-<div class="card w-full bg-base-100 shadow-lg">
-<!-- Trigger Button -->
-<label class="cursor-pointer" for="user-modal-1">
-<figure>
-<img alt="Ethan" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Ethan.png"/>
-</figure>
-<div class="card-body">
-<h2 class="card-title">Ethan</h2>
+</div>
+<div class="catalog-controls__actions">
+<label class="catalog-toggle">
+<input class="checkbox checkbox-primary" id="users-with-reviews" type="checkbox"/>
+<span>Only with reviews</span>
+</label>
+<div class="catalog-filter-group">
+<button class="btn btn-tertiary" onclick="clearUserFilters()" type="button">
+            Reset filters
+          </button>
+</div>
+</div>
+</div>
+<div class="catalog-grid" id="user-grid">
+<div class="catalog-card" data-has-reviews="1" data-search="Ethan">
+<label class="catalog-card__click" for="user-modal-1">
+<div class="catalog-card__media">
+<img alt="Ethan" src="database_images/users/Ethan.png"/>
+</div>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Ethan</h2>
+</div>
+<div class="catalog-card__meta">
+<span class="catalog-chip">5 reviews</span>
+</div>
 </div>
 </label>
+</div>
 <input class="modal-toggle" id="user-modal-1" type="checkbox"/>
 <div class="modal">
 <div class="modal-box relative">
@@ -454,16 +841,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Rich malt sweetness with toffee and coffee. Smooth finish and well balanced.</p>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-toffee">
-<span class="font-medium">toffee</span>
+<span class="font-medium">Toffee</span>
 </div>
 <div class="badge badge-lg tasting-note-coffee">
-<span class="font-medium">coffee</span>
+<span class="font-medium">Coffee</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 </div>
 </div>
@@ -514,10 +901,10 @@
 <span class="font-medium">Orange Peel</span>
 </div>
 <div class="badge badge-lg tasting-note-herbal">
-<span class="font-medium">herbal</span>
+<span class="font-medium">Herbal</span>
 </div>
 <div class="badge badge-lg tasting-note-pine">
-<span class="font-medium">pine</span>
+<span class="font-medium">Pine</span>
 </div>
 </div>
 </div>
@@ -562,16 +949,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Creamy vanilla and caramel with orange and polished oak.</p>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-caramel">
-<span class="font-medium">caramel</span>
+<span class="font-medium">Caramel</span>
 </div>
 <div class="badge badge-lg tasting-note-orange">
 <span class="font-medium">Orange</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 </div>
 </div>
@@ -616,16 +1003,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Soft vanilla and caramel with light herbal oak.</p>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-caramel">
-<span class="font-medium">caramel</span>
+<span class="font-medium">Caramel</span>
 </div>
 <div class="badge badge-lg tasting-note-herbal">
-<span class="font-medium">herbal</span>
+<span class="font-medium">Herbal</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 </div>
 </div>
@@ -636,18 +1023,21 @@
 <!-- Overlay (click outside to close) -->
 <label class="modal-backdrop" for="user-modal-1"></label>
 </div>
-<!-- Modal -->
+<div class="catalog-card" data-has-reviews="1" data-search="Kevin">
+<label class="catalog-card__click" for="user-modal-4">
+<div class="catalog-card__media">
+<img alt="Kevin" src="database_images/users/Kevin.png"/>
 </div>
-<div class="card w-full bg-base-100 shadow-lg">
-<!-- Trigger Button -->
-<label class="cursor-pointer" for="user-modal-4">
-<figure>
-<img alt="Kevin" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Kevin.png"/>
-</figure>
-<div class="card-body">
-<h2 class="card-title">Kevin</h2>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Kevin</h2>
+</div>
+<div class="catalog-card__meta">
+<span class="catalog-chip">5 reviews</span>
+</div>
 </div>
 </label>
+</div>
 <input class="modal-toggle" id="user-modal-4" type="checkbox"/>
 <div class="modal">
 <div class="modal-box relative">
@@ -698,16 +1088,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Spicy and bright with baked apple and cinnamon. Clean, herbal finish.</p>
 <div class="badge badge-lg tasting-note-cinnamon">
-<span class="font-medium">cinnamon</span>
+<span class="font-medium">Cinnamon</span>
 </div>
 <div class="badge badge-lg tasting-note-bakingspice">
-<span class="font-medium">baking spice</span>
+<span class="font-medium">Baking Spice</span>
 </div>
 <div class="badge badge-lg tasting-note-apple">
-<span class="font-medium">apple</span>
+<span class="font-medium">Apple</span>
 </div>
 <div class="badge badge-lg tasting-note-herbal">
-<span class="font-medium">herbal</span>
+<span class="font-medium">Herbal</span>
 </div>
 </div>
 </div>
@@ -752,13 +1142,13 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Smooth agave with vanilla and caramel. Oak adds depth.</p>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-caramel">
-<span class="font-medium">caramel</span>
+<span class="font-medium">Caramel</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 </div>
 </div>
@@ -803,16 +1193,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Elegant and precise. Soft honeyed malt, floral lift, and clean oak.</p>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 <div class="badge badge-lg tasting-note-floral">
 <span class="font-medium">Floral</span>
 </div>
 <div class="badge badge-lg tasting-note-honey">
-<span class="font-medium">honey</span>
+<span class="font-medium">Honey</span>
 </div>
 </div>
 </div>
@@ -857,16 +1247,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Barrel-forward with caramel, vanilla, and smoky oak.</p>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-caramel">
-<span class="font-medium">caramel</span>
+<span class="font-medium">Caramel</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 <div class="badge badge-lg tasting-note-smoke">
-<span class="font-medium">smoke</span>
+<span class="font-medium">Smoke</span>
 </div>
 </div>
 </div>
@@ -914,13 +1304,13 @@
 <span class="font-medium">Lemon</span>
 </div>
 <div class="badge badge-lg tasting-note-herbal">
-<span class="font-medium">herbal</span>
+<span class="font-medium">Herbal</span>
 </div>
 <div class="badge badge-lg tasting-note-almond">
-<span class="font-medium">almond</span>
+<span class="font-medium">Almond</span>
 </div>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 </div>
 </div>
@@ -931,18 +1321,21 @@
 <!-- Overlay (click outside to close) -->
 <label class="modal-backdrop" for="user-modal-4"></label>
 </div>
-<!-- Modal -->
+<div class="catalog-card" data-has-reviews="1" data-search="Bill">
+<label class="catalog-card__click" for="user-modal-5">
+<div class="catalog-card__media">
+<img alt="Bill" src="database_images/users/Bill.png"/>
 </div>
-<div class="card w-full bg-base-100 shadow-lg">
-<!-- Trigger Button -->
-<label class="cursor-pointer" for="user-modal-5">
-<figure>
-<img alt="Bill" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Bill.png"/>
-</figure>
-<div class="card-body">
-<h2 class="card-title">Bill</h2>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Bill</h2>
+</div>
+<div class="catalog-card__meta">
+<span class="catalog-chip">5 reviews</span>
+</div>
 </div>
 </label>
+</div>
 <input class="modal-toggle" id="user-modal-5" type="checkbox"/>
 <div class="modal">
 <div class="modal-box relative">
@@ -993,16 +1386,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Sweet rum cask notes with brown sugar and molasses. Rounded oak and toffee.</p>
 <div class="badge badge-lg tasting-note-brownsugar">
-<span class="font-medium">brown sugar</span>
+<span class="font-medium">Brown Sugar</span>
 </div>
 <div class="badge badge-lg tasting-note-molasses">
-<span class="font-medium">molasses</span>
+<span class="font-medium">Molasses</span>
 </div>
 <div class="badge badge-lg tasting-note-toffee">
-<span class="font-medium">toffee</span>
+<span class="font-medium">Toffee</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 </div>
 </div>
@@ -1047,13 +1440,13 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Smoky and earthy with a touch of coffee and orange peel.</p>
 <div class="badge badge-lg tasting-note-smoke">
-<span class="font-medium">smoke</span>
+<span class="font-medium">Smoke</span>
 </div>
 <div class="badge badge-lg tasting-note-earthy">
 <span class="font-medium">Earthy</span>
 </div>
 <div class="badge badge-lg tasting-note-coffee">
-<span class="font-medium">coffee</span>
+<span class="font-medium">Coffee</span>
 </div>
 <div class="badge badge-lg tasting-note-orangepeel">
 <span class="font-medium">Orange Peel</span>
@@ -1101,16 +1494,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Raw but rich. Cocoa and coffee lead with nutty sweetness.</p>
 <div class="badge badge-lg tasting-note-cocoa">
-<span class="font-medium">cocoa</span>
+<span class="font-medium">Cocoa</span>
 </div>
 <div class="badge badge-lg tasting-note-coffee">
-<span class="font-medium">coffee</span>
+<span class="font-medium">Coffee</span>
 </div>
 <div class="badge badge-lg tasting-note-bitterchocolate">
-<span class="font-medium">bitter chocolate</span>
+<span class="font-medium">Bitter Chocolate</span>
 </div>
 <div class="badge badge-lg tasting-note-peanut">
-<span class="font-medium">peanut</span>
+<span class="font-medium">Peanut</span>
 </div>
 </div>
 </div>
@@ -1161,10 +1554,10 @@
 <span class="font-medium">Orange Peel</span>
 </div>
 <div class="badge badge-lg tasting-note-herbal">
-<span class="font-medium">herbal</span>
+<span class="font-medium">Herbal</span>
 </div>
 <div class="badge badge-lg tasting-note-pine">
-<span class="font-medium">pine</span>
+<span class="font-medium">Pine</span>
 </div>
 </div>
 </div>
@@ -1209,16 +1602,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Spicy rye with baked apple and herbal lift.</p>
 <div class="badge badge-lg tasting-note-rye">
-<span class="font-medium">rye</span>
+<span class="font-medium">Rye</span>
 </div>
 <div class="badge badge-lg tasting-note-bakingspice">
-<span class="font-medium">baking spice</span>
+<span class="font-medium">Baking Spice</span>
 </div>
 <div class="badge badge-lg tasting-note-applepie">
-<span class="font-medium">apple pie</span>
+<span class="font-medium">Apple Pie</span>
 </div>
 <div class="badge badge-lg tasting-note-herbal">
-<span class="font-medium">herbal</span>
+<span class="font-medium">Herbal</span>
 </div>
 </div>
 </div>
@@ -1229,18 +1622,21 @@
 <!-- Overlay (click outside to close) -->
 <label class="modal-backdrop" for="user-modal-5"></label>
 </div>
-<!-- Modal -->
+<div class="catalog-card" data-has-reviews="1" data-search="Marissa">
+<label class="catalog-card__click" for="user-modal-6">
+<div class="catalog-card__media">
+<img alt="Marissa" src="database_images/users/Marissa.png"/>
 </div>
-<div class="card w-full bg-base-100 shadow-lg">
-<!-- Trigger Button -->
-<label class="cursor-pointer" for="user-modal-6">
-<figure>
-<img alt="Marissa" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Marissa.png"/>
-</figure>
-<div class="card-body">
-<h2 class="card-title">Marissa</h2>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Marissa</h2>
+</div>
+<div class="catalog-card__meta">
+<span class="catalog-chip">5 reviews</span>
+</div>
 </div>
 </label>
+</div>
 <input class="modal-toggle" id="user-modal-6" type="checkbox"/>
 <div class="modal">
 <div class="modal-box relative">
@@ -1291,16 +1687,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Polished and rich. Vanilla, caramel, and orange peel carry into a long oak finish.</p>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-caramel">
-<span class="font-medium">caramel</span>
+<span class="font-medium">Caramel</span>
 </div>
 <div class="badge badge-lg tasting-note-orangepeel">
 <span class="font-medium">Orange Peel</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 </div>
 </div>
@@ -1345,16 +1741,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Warm spices and brown sugar. Vanilla and toffee linger.</p>
 <div class="badge badge-lg tasting-note-brownsugar">
-<span class="font-medium">brown sugar</span>
+<span class="font-medium">Brown Sugar</span>
 </div>
 <div class="badge badge-lg tasting-note-cinnamon">
-<span class="font-medium">cinnamon</span>
+<span class="font-medium">Cinnamon</span>
 </div>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-toffee">
-<span class="font-medium">toffee</span>
+<span class="font-medium">Toffee</span>
 </div>
 </div>
 </div>
@@ -1399,16 +1795,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Bright and modern with citrus, tropical fruit, and gentle spice.</p>
 <div class="badge badge-lg tasting-note-tropical">
-<span class="font-medium">tropical</span>
+<span class="font-medium">Tropical</span>
 </div>
 <div class="badge badge-lg tasting-note-orange">
 <span class="font-medium">Orange</span>
 </div>
 <div class="badge badge-lg tasting-note-coconut">
-<span class="font-medium">coconut</span>
+<span class="font-medium">Coconut</span>
 </div>
 <div class="badge badge-lg tasting-note-bakingspice">
-<span class="font-medium">baking spice</span>
+<span class="font-medium">Baking Spice</span>
 </div>
 </div>
 </div>
@@ -1453,16 +1849,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Honeyed and herbal with soft spice and vanilla.</p>
 <div class="badge badge-lg tasting-note-honey">
-<span class="font-medium">honey</span>
+<span class="font-medium">Honey</span>
 </div>
 <div class="badge badge-lg tasting-note-bakingspice">
-<span class="font-medium">baking spice</span>
+<span class="font-medium">Baking Spice</span>
 </div>
 <div class="badge badge-lg tasting-note-herbal">
-<span class="font-medium">herbal</span>
+<span class="font-medium">Herbal</span>
 </div>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 </div>
 </div>
@@ -1507,16 +1903,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Clean cane sweetness with coconut and honey.</p>
 <div class="badge badge-lg tasting-note-honey">
-<span class="font-medium">honey</span>
+<span class="font-medium">Honey</span>
 </div>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-coconut">
-<span class="font-medium">coconut</span>
+<span class="font-medium">Coconut</span>
 </div>
 <div class="badge badge-lg tasting-note-cereal">
-<span class="font-medium">cereal</span>
+<span class="font-medium">Cereal</span>
 </div>
 </div>
 </div>
@@ -1527,18 +1923,21 @@
 <!-- Overlay (click outside to close) -->
 <label class="modal-backdrop" for="user-modal-6"></label>
 </div>
-<!-- Modal -->
+<div class="catalog-card" data-has-reviews="1" data-search="Andy">
+<label class="catalog-card__click" for="user-modal-7">
+<div class="catalog-card__media">
+<img alt="Andy" src="database_images/users/Andy.png"/>
 </div>
-<div class="card w-full bg-base-100 shadow-lg">
-<!-- Trigger Button -->
-<label class="cursor-pointer" for="user-modal-7">
-<figure>
-<img alt="Andy" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Andy.png"/>
-</figure>
-<div class="card-body">
-<h2 class="card-title">Andy</h2>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Andy</h2>
+</div>
+<div class="catalog-card__meta">
+<span class="catalog-chip">4 reviews</span>
+</div>
 </div>
 </label>
+</div>
 <input class="modal-toggle" id="user-modal-7" type="checkbox"/>
 <div class="modal">
 <div class="modal-box relative">
@@ -1589,16 +1988,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Classic profile with toasted oak and vanilla. Light smoke and caramel.</p>
 <div class="badge badge-lg tasting-note-toastedoak">
-<span class="font-medium">toasted oak</span>
+<span class="font-medium">Toasted Oak</span>
 </div>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-caramel">
-<span class="font-medium">caramel</span>
+<span class="font-medium">Caramel</span>
 </div>
 <div class="badge badge-lg tasting-note-smoke">
-<span class="font-medium">smoke</span>
+<span class="font-medium">Smoke</span>
 </div>
 </div>
 </div>
@@ -1646,13 +2045,13 @@
 <span class="font-medium">Spice</span>
 </div>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-caramel">
-<span class="font-medium">caramel</span>
+<span class="font-medium">Caramel</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 </div>
 </div>
@@ -1697,16 +2096,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Winey fruit and light smoke with a cocoa-vanilla finish.</p>
 <div class="badge badge-lg tasting-note-smoke">
-<span class="font-medium">smoke</span>
+<span class="font-medium">Smoke</span>
 </div>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-cocoa">
-<span class="font-medium">cocoa</span>
+<span class="font-medium">Cocoa</span>
 </div>
 <div class="badge badge-lg tasting-note-fruit">
-<span class="font-medium">fruit</span>
+<span class="font-medium">Fruit</span>
 </div>
 </div>
 </div>
@@ -1751,16 +2150,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Smoky and earthy with herbal spice and pepper.</p>
 <div class="badge badge-lg tasting-note-smoke">
-<span class="font-medium">smoke</span>
+<span class="font-medium">Smoke</span>
 </div>
 <div class="badge badge-lg tasting-note-earthy">
 <span class="font-medium">Earthy</span>
 </div>
 <div class="badge badge-lg tasting-note-herbal">
-<span class="font-medium">herbal</span>
+<span class="font-medium">Herbal</span>
 </div>
 <div class="badge badge-lg tasting-note-blackpepper">
-<span class="font-medium">black pepper</span>
+<span class="font-medium">Black Pepper</span>
 </div>
 </div>
 </div>
@@ -1771,18 +2170,21 @@
 <!-- Overlay (click outside to close) -->
 <label class="modal-backdrop" for="user-modal-7"></label>
 </div>
-<!-- Modal -->
+<div class="catalog-card" data-has-reviews="1" data-search="Sara">
+<label class="catalog-card__click" for="user-modal-8">
+<div class="catalog-card__media">
+<img alt="Sara" src="database_images/users/Sara.png"/>
 </div>
-<div class="card w-full bg-base-100 shadow-lg">
-<!-- Trigger Button -->
-<label class="cursor-pointer" for="user-modal-8">
-<figure>
-<img alt="Sara" class="w-[250px] h-[250px] object-contain mx-auto" src="database_images/users/Sara.png"/>
-</figure>
-<div class="card-body">
-<h2 class="card-title">Sara</h2>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Sara</h2>
+</div>
+<div class="catalog-card__meta">
+<span class="catalog-chip">4 reviews</span>
+</div>
 </div>
 </label>
+</div>
 <input class="modal-toggle" id="user-modal-8" type="checkbox"/>
 <div class="modal">
 <div class="modal-box relative">
@@ -1836,13 +2238,13 @@
 <span class="font-medium">Floral</span>
 </div>
 <div class="badge badge-lg tasting-note-smoke">
-<span class="font-medium">smoke</span>
+<span class="font-medium">Smoke</span>
 </div>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 </div>
 </div>
@@ -1887,16 +2289,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Coffee and bitter chocolate lead. Dark toffee and oak support.</p>
 <div class="badge badge-lg tasting-note-coffee">
-<span class="font-medium">coffee</span>
+<span class="font-medium">Coffee</span>
 </div>
 <div class="badge badge-lg tasting-note-bitterchocolate">
-<span class="font-medium">bitter chocolate</span>
+<span class="font-medium">Bitter Chocolate</span>
 </div>
 <div class="badge badge-lg tasting-note-toffee">
-<span class="font-medium">toffee</span>
+<span class="font-medium">Toffee</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 </div>
 </div>
@@ -1941,16 +2343,16 @@
 <!-- Review Details -->
 <p class="text-md mb-2">Soft citrus and vanilla with a light spice finish.</p>
 <div class="badge badge-lg tasting-note-vanilla">
-<span class="font-medium">vanilla</span>
+<span class="font-medium">Vanilla</span>
 </div>
 <div class="badge badge-lg tasting-note-cinnamon">
-<span class="font-medium">cinnamon</span>
+<span class="font-medium">Cinnamon</span>
 </div>
 <div class="badge badge-lg tasting-note-apple">
-<span class="font-medium">apple</span>
+<span class="font-medium">Apple</span>
 </div>
 <div class="badge badge-lg tasting-note-oak">
-<span class="font-medium">oak</span>
+<span class="font-medium">Oak</span>
 </div>
 </div>
 </div>
@@ -2004,7 +2406,7 @@
 <span class="font-medium">Orange</span>
 </div>
 <div class="badge badge-lg tasting-note-herbal">
-<span class="font-medium">herbal</span>
+<span class="font-medium">Herbal</span>
 </div>
 </div>
 </div>
@@ -2015,9 +2417,62 @@
 <!-- Overlay (click outside to close) -->
 <label class="modal-backdrop" for="user-modal-8"></label>
 </div>
-<!-- Modal -->
 </div>
 </div>
+</div>
+<script>
+  function applyUserFilters() {
+    const searchInput = document.getElementById("user-search");
+    const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+    const onlyWithReviews = document.getElementById("users-with-reviews")?.checked;
+    const cards = document.querySelectorAll("#user-grid .catalog-card");
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const searchText = (card.dataset.search || "").toLowerCase();
+      const hasReviews = card.dataset.hasReviews === "1";
+      const matchesSearch = !query || searchText.includes(query);
+      const matchesReviews = !onlyWithReviews || hasReviews;
+      const shouldShow = matchesSearch && matchesReviews;
+
+      card.classList.toggle("hidden", !shouldShow);
+      if (shouldShow) {
+        visibleCount += 1;
+      }
+    });
+
+    const countEl = document.getElementById("user-count");
+    if (countEl) {
+      countEl.textContent = `${visibleCount} users`;
+    }
+  }
+
+  function clearUserFilters() {
+    const searchInput = document.getElementById("user-search");
+    const reviewsToggle = document.getElementById("users-with-reviews");
+    if (searchInput) {
+      searchInput.value = "";
+    }
+    if (reviewsToggle) {
+      reviewsToggle.checked = false;
+    }
+    applyUserFilters();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("user-search");
+    if (searchInput) {
+      searchInput.addEventListener("input", applyUserFilters);
+    }
+
+    const reviewsToggle = document.getElementById("users-with-reviews");
+    if (reviewsToggle) {
+      reviewsToggle.addEventListener("change", applyUserFilters);
+    }
+
+    applyUserFilters();
+  });
+</script>
 </div>
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[9999]" id="loading-overlay">
 <div class="text-white text-3xl">Processing...</div>
