@@ -740,7 +740,7 @@
 <div class="home-card__title">Events</div>
 <div class="home-card__desc">Manage tastings, guest lists, and bottle lineups.</div>
 </a>
-<a class="home-card" href="/bartender">
+<a class="home-card" href="/bartender" onclick="return guardBartenderAccess();">
 <div class="home-card__icon"><i class="fas fa-sliders-h"></i></div>
 <div class="home-card__title">Bartender Console</div>
 <div class="home-card__desc">Adjust data, manage tables, and run maintenance tasks.</div>
@@ -748,6 +748,18 @@
 </div>
 </div>
 </div>
+<script>
+  function guardBartenderAccess() {
+    const entry = prompt("Enter bartender password:");
+    if (entry === "default") {
+      return true;
+    }
+    if (entry !== null) {
+      showAlert("Incorrect password.", "error");
+    }
+    return false;
+  }
+</script>
 </div>
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[9999]" id="loading-overlay">
 <div class="text-white text-3xl">Processing...</div>
