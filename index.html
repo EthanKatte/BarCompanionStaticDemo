@@ -26,6 +26,60 @@
         box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
         text-align: center;
       }
+      .status-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin: 28px 0 8px;
+        text-align: left;
+      }
+      .status-card {
+        border: 1px solid #e6dfd6;
+        border-radius: 14px;
+        padding: 16px;
+        background: #faf8f5;
+      }
+      .status-title {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: #7a5d45;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      .status-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 8px;
+      }
+      .status-item {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 28px;
+        height: 22px;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+      .status-pill--ok {
+        background: #2f7d5d;
+        color: #ffffff;
+      }
+      .status-pill--no {
+        background: #8b4a4a;
+        color: #ffffff;
+      }
       h1 {
         margin: 0 0 16px;
         font-size: 2rem;
@@ -53,11 +107,31 @@
     <main>
       <h1>Static Preview</h1>
       <p>
-        This is a static version of Bar Companion. Interactive functionality has been
-        removed. It exists exclusively to provide an idea of the application’s purpose.
+        This is a static version of Bar Companion. </br> 
+        Interactive functionality has been removed. It exists exclusively to provide an idea of the application’s purpose.
         </br>
         Click around, look at some bottles, example reviews and events!
       </p>
+      <div class="status-grid">
+        <div class="status-card">
+          <div class="status-title">Works in static</div>
+          <ul class="status-list">
+            <li class="status-item"><span class="status-pill status-pill--ok">OK</span><span>Page navigation and layout</span></li>
+            <li class="status-item"><span class="status-pill status-pill--ok">OK</span><span>Inventory grid and card details</span></li>
+            <li class="status-item"><span class="status-pill status-pill--ok">OK</span><span>Users and events listings</span></li>
+          </ul>
+        </div>
+        <div class="status-card">
+          <div class="status-title">Disabled in static</div>
+          <ul class="status-list">
+            <li class="status-item"><span class="status-pill status-pill--no">NO</span><span>Filters</span></li>
+            <li class="status-item"><span class="status-pill status-pill--no">NO</span><span>Event Console/Client Views</span></li>
+            <li class="status-item"><span class="status-pill status-pill--no">NO</span><span>API-backed actions (adds, edits, updates)</span></li>
+            <li class="status-item"><span class="status-pill status-pill--no">NO</span><span>"Suprise Me" button</span></li>
+
+          </ul>
+        </div>
+      </div>
       <a class="button" href="inventory.html">Continue to Inventory</a>
     </main>
   </body>
