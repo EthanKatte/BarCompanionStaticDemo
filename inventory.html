@@ -236,6 +236,30 @@
       pointer-events: none;
   }
 
+  html {
+      scrollbar-width: auto;
+      scrollbar-color: var(--catalog-accent-strong) transparent;
+  }
+
+  *::-webkit-scrollbar {
+      width: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+      background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+      background-color: var(--catalog-accent-strong);
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+      background-color: var(--catalog-accent);
+  }
+
   .catalog-orb--a {
       width: 260px;
       height: 260px;
@@ -343,35 +367,41 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.5rem;
-      align-items: end;
+      align-items: center;
       background: var(--catalog-panel);
       border-radius: 20px;
       border: 1px solid var(--catalog-border);
       padding: 1.25rem;
   }
 
+  .catalog-controls--inventory {
+      grid-template-columns: minmax(300px, 500px) auto auto;
+  }
+
+  .catalog-search {
+      display: grid;
+      gap: 0.6rem;
+  }
+
   .catalog-search__label {
-      display: block;
-      font-size: 0.85rem;
       font-weight: 600;
       color: var(--catalog-ink);
-      margin-bottom: 0.5rem;
+  }
+
+  .catalog-search__meta {
+      font-size: 0.85rem;
+      color: var(--catalog-muted);
   }
 
   .catalog-search__input {
       width: 100%;
   }
 
-  .catalog-search__meta {
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      color: var(--catalog-muted);
-  }
-
   .catalog-controls__actions {
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
+      align-items: flex-start;
   }
 
   .catalog-toggle {
@@ -382,10 +412,21 @@
       color: var(--catalog-ink);
   }
 
+  .catalog-toggle-group {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
+  }
+
   .catalog-filter-group {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
+      align-items: center;
   }
 
   .catalog-grid {
@@ -408,7 +449,7 @@
   }
 
   .catalog-card.is-unavailable {
-      opacity: 0.68;
+      opacity: 0.3;
   }
 
   .catalog-card__click {
@@ -450,6 +491,11 @@
 
   .catalog-badge--unavailable {
       background: #6f7a7a;
+  }
+
+  .catalog-badge--special {
+      background: var(--fallback-s, oklch(var(--s)/1));
+      color: var(--fallback-sc, oklch(var(--sc)/1));
   }
 
   .catalog-card__body {
@@ -544,7 +590,7 @@
   }
   </style>
 </head>
-<body class="bg-base h-screen">
+<body class="bg-base h-screen overflow-x-hidden">
 <!-- Navigation Bar -->
 <nav class="bg-primary text-white p-4 flex items-center justify-between">
 <!-- Left-aligned Screensaver Button -->
@@ -563,6 +609,11 @@
 <li>
 <a class="hover:underline flex items-center" href="inventory.html">
 <i class="fas fa-boxes text-3xl"></i>
+</a>
+</li>
+<li>
+<a class="hover:underline flex items-center" href="distilleries.html">
+<i class="fas fa-industry text-3xl"></i>
 </a>
 </li>
 <li>
@@ -596,19 +647,19 @@
 <div class="catalog-stats">
 <div class="catalog-stat">
 <span class="catalog-stat__label">Total bottles</span>
-<span class="catalog-stat__value">27</span>
+<span class="catalog-stat__value">28</span>
 </div>
 <div class="catalog-stat">
 <span class="catalog-stat__label">Available Whiskies</span>
-<span class="catalog-stat__value">10</span>
+<span class="catalog-stat__value">14</span>
 </div>
 <div class="catalog-stat">
 <span class="catalog-stat__label">Available</span>
-<span class="catalog-stat__value">22</span>
+<span class="catalog-stat__value">25</span>
 </div>
 <div class="catalog-stat">
 <span class="catalog-stat__label">Unavailable</span>
-<span class="catalog-stat__value">5</span>
+<span class="catalog-stat__value">3</span>
 </div>
 </div>
 </div>
@@ -698,6 +749,18 @@
 </label>
 <textarea class="textarea textarea-bordered" name="description"></textarea>
 </div>
+<div class="form-control">
+<label class="label cursor-pointer gap-3">
+<span class="label-text">Available</span>
+<input checked="" class="checkbox checkbox-primary" name="available" type="checkbox"/>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer gap-3">
+<span class="label-text">Special bottle</span>
+<input class="checkbox checkbox-primary" name="special" type="checkbox"/>
+</label>
+</div>
 <!-- File Upload -->
 <div class="form-control">
 <label class="label">
@@ -782,8 +845,30 @@
       jsonData[key] = value;
     });
 
+    const availableInput = document.querySelector("input[name='available']");
+    if (availableInput) {
+      jsonData.available = availableInput.checked ? "1" : "0";
+    }
+
+    const specialInput = document.querySelector("input[name='special']");
+    if (specialInput) {
+      jsonData.special = specialInput.checked ? "1" : "0";
+    }
+
     if (!jsonData.brand || jsonData.brand.trim() === "") {
       jsonData.brand = jsonData.brand_select;
+    }
+
+    if (!jsonData.spirit_type || jsonData.spirit_type.trim() === "") {
+      console.log(jsonData.spirit_type_select)
+      console.log(jsonData.spirit_type)
+      jsonData.spirit_type = jsonData.spirit_type_select;
+    }
+
+    if (!jsonData.subtype || jsonData.subtype.trim() === "") {
+      if (jsonData.subtype_select && jsonData.subtype_select !== "__custom__") {
+        jsonData.subtype = jsonData.subtype_select;
+      }
     }
 
     const fileInput = document.getElementById("image-upload");
@@ -877,7 +962,16 @@
     }
 
     try {
-      const res  = await fetch(`/get_images?brand=${encodeURIComponent(brand)}&name=${encodeURIComponent(name)}`);
+      const typeSelect = document.getElementById("spiritTypeSelect");
+      const typeInput = document.getElementById("customSpiritType");
+      const spiritType = typeSelect?.value === "__custom__" ? typeInput?.value : typeSelect?.value;
+      const typeSuffix = spiritType && spiritType.trim()
+        ? `${spiritType.trim()} bottle`
+        : "whiskey bottle";
+
+      const res = await fetch(
+        `/get_images?brand=${encodeURIComponent(brand)}&name=${encodeURIComponent(name)}&type=${encodeURIComponent(typeSuffix)}`
+      );
       const data = await res.json();
       displayImageOptions(data.images);
     } catch (err) {
@@ -936,19 +1030,14 @@
     });
   }
 </script>
-<div class="catalog-controls">
+<div class="catalog-controls catalog-controls--inventory">
 <div class="catalog-search">
 <label class="catalog-search__label" for="inventory-search">Search bottles</label>
-<input class="input input-bordered catalog-search__input" id="inventory-search" placeholder="Search brand, bottle, or style" type="text">
+<input class="input input-bordered catalog-search__input" id="inventory-search" placeholder="Search brand, bottle, style, or notes" type="text">
 <div class="catalog-search__meta">
-<span id="inventory-count">27 bottles</span>
+<span id="inventory-count">28 bottles</span>
 </div>
 </input></div>
-<div class="catalog-controls__actions">
-<label class="catalog-toggle">
-<input class="checkbox checkbox-primary" id="inventory-hide-unavailable" type="checkbox"/>
-<span>Hide unavailable</span>
-</label>
 <div class="catalog-filter-group">
 <label class="btn btn-primary" for="filter-bottles-modal">Filter</label>
 <input class="modal-toggle" id="filter-bottles-modal" type="checkbox"/>
@@ -1005,6 +1094,7 @@
 <option value="Single Malt">Single Malt</option>
 <option value="New Make Spirit">New Make Spirit</option>
 <option value="Rye">Rye</option>
+<option value="Blended">Blended</option>
 <option value="Bourbon">Bourbon</option>
 <option value="Bourbon">Bourbon</option>
 <option value="Bourbon">Bourbon</option>
@@ -1032,8 +1122,8 @@
 <span class="label-text">Sort By</span>
 </label>
 <select class="select select-bordered" id="sort-by">
-<option value="name">Name</option>
 <option value="brand">Brand</option>
+<option value="name">Name</option>
 <option value="abv">ABV</option>
 </select>
 </div>
@@ -1056,7 +1146,6 @@
           const subtype = document.getElementById("filter-subtype").value;
           const sortBy = document.getElementById("sort-by").value;
           const order = document.getElementById("order").value;
-      
           // Build query parameters
           const params = new URLSearchParams({
             brand: brand || "",
@@ -1092,22 +1181,35 @@
     removeDuplicateOptions("filter-brand");
     removeDuplicateOptions("filter-type");
     removeDuplicateOptions("filter-subtype");
+
   });
 
 
 </script>
 <button class="btn btn-tertiary" onclick="window.location.href = 'inventory.html'" type="button">
-            Clear filters
-          </button>
+          Clear filters
+        </button>
 </div>
+<div class="catalog-toggle-group">
+<label class="catalog-toggle">
+<input class="checkbox checkbox-primary" id="inventory-hide-unavailable" type="checkbox"/>
+<span>Hide unavailable</span>
+</label>
+<label class="catalog-toggle">
+<input class="checkbox checkbox-primary" id="filter-special" type="checkbox"/>
+<span>Show only special</span>
+</label>
+<label class="catalog-toggle">
+<input class="checkbox checkbox-primary" id="filter-hide-special" type="checkbox"/>
+<span>Hide special</span>
+</label>
 </div>
 </div>
 <div class="catalog-grid" id="bottle-grid">
-<div class="catalog-card" data-available="1" data-search="Archie Rose Blasphemy Whiskey Blended">
+<div class="catalog-card" data-available="1" data-search="Archie Rose Blasphemy Whiskey Blended ('Toffee', 1) ('Oak', 1) ('Coffee', 1) ('Bitter Chocolate', 1) Blackberry Orange Peel Bitter Chocolate Malt Cocoa Coffee" data-special="0">
 <div class="catalog-card__click bottle-card" data-bottle-id="1">
 <div class="catalog-card__media">
 <img alt="Blasphemy" class="delayed" data-src="database_images/bottles/archie_rose_blasphemy.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1122,11 +1224,10 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Archie Rose Opera House - Classical Whiskey Single Malt">
+<div class="catalog-card" data-available="1" data-search="Archie Rose Opera House - Classical Whiskey Single Malt ('Vanilla', 1) ('Oak', 1) ('Honey', 1) ('Floral', 1) Peach Grape Cereal Hazelnut Rose" data-special="0">
 <div class="catalog-card__click bottle-card" data-bottle-id="2">
 <div class="catalog-card__media">
 <img alt="Opera House - Classical" class="delayed" data-src="database_images/bottles/archie_rose_classic.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1141,11 +1242,10 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Archie Rose Opera House - Contemporary Whiskey Single Malt">
+<div class="catalog-card" data-available="1" data-search="Archie Rose Opera House - Contemporary Whiskey Single Malt ('Tropical', 1) ('Orange', 1) ('Coconut', 1) ('Baking Spice', 1) Tropical Graham Cracker Milk Chocolate Cocoa Almond Walnut Violet" data-special="0">
 <div class="catalog-card__click bottle-card" data-bottle-id="3">
 <div class="catalog-card__media">
 <img alt="Opera House - Contemporary" class="delayed" data-src="database_images/bottles/archie_rose_contemporary.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1160,11 +1260,10 @@
 </div>
 </div>
 </div>
-<div class="catalog-card is-unavailable" data-available="0" data-search="Archie Rose Rum Cask Single Malt Whiskey Single Malt">
+<div class="catalog-card" data-available="1" data-search="Archie Rose Rum Cask Single Malt Whiskey Single Malt ('Toffee', 1) ('Oak', 1) ('Molasses', 1) ('Brown Sugar', 1) Coconut Banana Stone Fruit Baking Spice Brown Sugar Caramel" data-special="0">
 <div class="catalog-card__click bottle-card" data-bottle-id="4">
 <div class="catalog-card__media">
 <img alt="Rum Cask Single Malt" class="delayed" data-src="database_images/bottles/archie_rose_rum_cask.jpg"/>
-<span class="catalog-badge catalog-badge--unavailable">Unavailable</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1179,7 +1278,7 @@
 </div>
 </div>
 </div>
-<div class="catalog-card is-unavailable" data-available="0" data-search="Archie Rose Rye Whiskey Rye">
+<div class="catalog-card is-unavailable" data-available="0" data-search="Archie Rose Rye Whiskey Rye ('Herbal', 1) ('Cinnamon', 1) ('Baking Spice', 1) ('Apple', 1) Custard Spice Apple Pie" data-special="0">
 <div class="catalog-card__click bottle-card" data-bottle-id="5">
 <div class="catalog-card__media">
 <img alt="Rye" class="delayed" data-src="database_images/bottles/archie_rose_rye.jpg"/>
@@ -1198,11 +1297,10 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Archie Rose Single Malt Whiskey Single Malt">
+<div class="catalog-card" data-available="1" data-search="Archie Rose Single Malt Whiskey Single Malt ('Vanilla', 1) ('Toffee', 1) ('Oak', 1) ('Coffee', 1) Herbal Raisin Toffee Chocolates Coffee Dessert Sweet" data-special="0">
 <div class="catalog-card__click bottle-card" data-bottle-id="6">
 <div class="catalog-card__media">
 <img alt="Single Malt" class="delayed" data-src="database_images/bottles/archie_rose_single_malt.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1217,11 +1315,10 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Archie Rose Six Malt New Make Whiskey New Make Spirit">
+<div class="catalog-card" data-available="1" data-search="Archie Rose Six Malt New Make Whiskey New Make Spirit ('Peanut', 1) ('Coffee', 1) ('Cocoa', 1) ('Bitter Chocolate', 1) Earthy Chocolates Coffee Nut Toffee" data-special="0">
 <div class="catalog-card__click bottle-card" data-bottle-id="7">
 <div class="catalog-card__media">
 <img alt="Six Malt New Make" class="delayed" data-src="database_images/bottles/archie_rose_six_malt.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1236,11 +1333,12 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Archie Rose Dry Grown Rye Whiskey Rye">
+<div class="catalog-card is-unavailable" data-available="0" data-search="Archie Rose Dry Grown Rye Whiskey Rye ('Rye', 1) ('Herbal', 1) ('Baking Spice', 1) ('Apple Pie', 1) Strawberry Apricot Milk Chocolate Cereal Rye Almond" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="60">
 <div class="catalog-card__media">
 <img alt="Dry Grown Rye" class="delayed" data-src="database_images/bottles/Dry_Grown_Rye_Archie_Rose.png"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--unavailable">Unavailable</span>
+<span class="catalog-badge catalog-badge--special mt-8">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1255,11 +1353,29 @@
 </div>
 </div>
 </div>
-<div class="catalog-card is-unavailable" data-available="0" data-search="Blanton's Special Reserve Whiskey Bourbon">
+<div class="catalog-card" data-available="1" data-search="Archie Rose test Whiskey Blended " data-special="1">
+<div class="catalog-card__click bottle-card" data-bottle-id="89">
+<div class="catalog-card__media">
+<img alt="test" class="delayed" data-src="database_images/bottles/Archie_Rose_test.png"/>
+<span class="catalog-badge catalog-badge--special">Special</span>
+</div>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Archie Rose</h2>
+<span class="catalog-card__abv">40%</span>
+</div>
+<p class="catalog-card__name">test</p>
+<div class="catalog-card__meta">
+<span class="catalog-chip">Whiskey</span>
+<span class="catalog-chip catalog-chip--muted">Blended</span>
+</div>
+</div>
+</div>
+</div>
+<div class="catalog-card" data-available="1" data-search="Blanton's Special Reserve Whiskey Bourbon ('Vanilla', 1) ('Oak', 1) ('Cinnamon', 1) ('Apple', 1) Floral Cedar Raisin Vanilla Toffee Fruit White Pepper" data-special="0">
 <div class="catalog-card__click bottle-card" data-bottle-id="9">
 <div class="catalog-card__media">
 <img alt="Special Reserve" class="delayed" data-src="database_images/bottles/blantons_special_reserve.jpg"/>
-<span class="catalog-badge catalog-badge--unavailable">Unavailable</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1274,11 +1390,10 @@
 </div>
 </div>
 </div>
-<div class="catalog-card is-unavailable" data-available="0" data-search="Blanton's Private Reserve Whiskey Bourbon">
+<div class="catalog-card" data-available="1" data-search="Blanton's Private Reserve Whiskey Bourbon ('Vanilla', 1) ('Orange', 1) ('Oak', 1) ('Caramel', 1) Vanilla Caramel Butterscotch Oak Baking Spice Honey Rye Tobacco" data-special="0">
 <div class="catalog-card__click bottle-card" data-bottle-id="10">
 <div class="catalog-card__media">
 <img alt="Private Reserve" class="delayed" data-src="database_images/bottles/blantons_private_reserve.jpg"/>
-<span class="catalog-badge catalog-badge--unavailable">Unavailable</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1293,11 +1408,10 @@
 </div>
 </div>
 </div>
-<div class="catalog-card is-unavailable" data-available="0" data-search="Blanton's Gold Whiskey Bourbon">
+<div class="catalog-card" data-available="1" data-search="Blanton's Gold Whiskey Bourbon ('Vanilla', 1) ('Orange Peel', 1) ('Oak', 1) ('Caramel', 1) Rye Tobacco Caramel Honey Fruit Oak Vanilla" data-special="0">
 <div class="catalog-card__click bottle-card" data-bottle-id="11">
 <div class="catalog-card__media">
 <img alt="Gold" class="delayed" data-src="database_images/bottles/blantons_gold.jpg"/>
-<span class="catalog-badge catalog-badge--unavailable">Unavailable</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1312,11 +1426,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Burrito Fiestero Ensamble Mezcal Mezcal None">
+<div class="catalog-card" data-available="1" data-search="Burrito Fiestero Ensamble Mezcal Mezcal None ('Smoke', 1) ('Herbal', 1) ('Earthy', 1) ('Black Pepper', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="48">
 <div class="catalog-card__media">
 <img alt="Ensamble Mezcal" class="delayed" data-src="database_images/bottles/burrito_mezcal.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1330,11 +1444,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Casamigos Mezcal Mezcal None">
+<div class="catalog-card" data-available="1" data-search="Casamigos Mezcal Mezcal None ('Smoke', 1) ('Orange Peel', 1) ('Earthy', 1) ('Coffee', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="49">
 <div class="catalog-card__media">
 <img alt="Mezcal" class="delayed" data-src="database_images/bottles/casamigos_mezcal.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1348,11 +1462,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Cragganmore 12 Year Old Whiskey Single Malt">
+<div class="catalog-card" data-available="1" data-search="Cragganmore 12 Year Old Whiskey Single Malt ('Vanilla', 1) ('Smoke', 1) ('Oak', 1) ('Floral', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="12">
 <div class="catalog-card__media">
 <img alt="12 Year Old" class="delayed" data-src="database_images/bottles/cragganmore_12.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1367,11 +1481,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Cragganmore Distillers Edition Whiskey Scotch">
+<div class="catalog-card" data-available="1" data-search="Cragganmore Distillers Edition Whiskey Scotch ('Vanilla', 1) ('Smoke', 1) ('Fruit', 1) ('Cocoa', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="13">
 <div class="catalog-card__media">
 <img alt="Distillers Edition" class="delayed" data-src="database_images/bottles/cragganmore_distillers_2023.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1386,11 +1500,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Don Julio Reposada Tequila Tequila None">
+<div class="catalog-card" data-available="1" data-search="Don Julio Reposada Tequila Tequila None ('Vanilla', 1) ('Oak', 1) ('Caramel', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="45">
 <div class="catalog-card__media">
 <img alt="Reposada Tequila" class="delayed" data-src="database_images/bottles/don_julio_reposado.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1404,11 +1518,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Drambuie Honey Whiskey Liqueur None">
+<div class="catalog-card" data-available="1" data-search="Drambuie Honey Whiskey Liqueur None ('Vanilla', 1) ('Honey', 1) ('Herbal', 1) ('Baking Spice', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="20">
 <div class="catalog-card__media">
 <img alt="Honey Whiskey" class="delayed" data-src="database_images/bottles/drambuie.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1422,11 +1536,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Espolon Reposada Tequila Tequila None">
+<div class="catalog-card" data-available="1" data-search="Espolon Reposada Tequila Tequila None ('Vanilla', 1) ('Spice', 1) ('Oak', 1) ('Caramel', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="46">
 <div class="catalog-card__media">
 <img alt="Reposada Tequila" class="delayed" data-src="database_images/bottles/espolon_reposado.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1440,11 +1554,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Husk Spiced Bam Bam Rum None">
+<div class="catalog-card" data-available="1" data-search="Husk Spiced Bam Bam Rum None ('Vanilla', 1) ('Toffee', 1) ('Cinnamon', 1) ('Brown Sugar', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="54">
 <div class="catalog-card__media">
 <img alt="Spiced Bam Bam" class="delayed" data-src="database_images/bottles/husk_bam_bam.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1458,11 +1572,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Husk Botanic Rum None">
+<div class="catalog-card" data-available="1" data-search="Husk Botanic Rum None ('Vanilla', 1) ('Lemon', 1) ('Herbal', 1) ('Almond', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="55">
 <div class="catalog-card__media">
 <img alt="Botanic" class="delayed" data-src="database_images/bottles/husk_botanic.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1476,11 +1590,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Husk Pure Cane Rum None">
+<div class="catalog-card" data-available="1" data-search="Husk Pure Cane Rum None ('Vanilla', 1) ('Honey', 1) ('Coconut', 1) ('Cereal', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="56">
 <div class="catalog-card__media">
 <img alt="Pure Cane" class="delayed" data-src="database_images/bottles/husk_pure_cane.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1494,11 +1608,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Ink Gin Gin None">
+<div class="catalog-card" data-available="1" data-search="Ink Gin Gin None ('Wood', 1) ('Spice', 1) ('Pine', 1) ('Orange Peel', 1) ('Lemon', 1) ('Herbal', 1) ('Grain', 1) ('Fruity', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="38">
 <div class="catalog-card__media">
 <img alt="Gin" class="delayed" data-src="database_images/bottles/ink_gin.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1512,11 +1626,12 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Ink Bitter Orange Gin Gin None">
+<div class="catalog-card is-unavailable" data-available="0" data-search="Ink Bitter Orange Gin Gin None ('Pine', 1) ('Orange Peel', 1) ('Orange', 1) ('Herbal', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="39">
 <div class="catalog-card__media">
 <img alt="Bitter Orange Gin" class="delayed" data-src="database_images/bottles/ink_orange_gin.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--unavailable">Unavailable</span>
+<span class="catalog-badge catalog-badge--special mt-8">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1530,11 +1645,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Ink Art Gin Gin None">
+<div class="catalog-card" data-available="1" data-search="Ink Art Gin Gin None ('Orange', 1) ('Lemon', 1) ('Herbal', 1) ('Floral', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="40">
 <div class="catalog-card__media">
 <img alt="Art Gin" class="delayed" data-src="database_images/bottles/ink_art_gin.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1548,11 +1663,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Jack Daniel's Old No.7 Whiskey American whiskey">
+<div class="catalog-card" data-available="1" data-search="Jack Daniel's Old No.7 Whiskey American whiskey ('Vanilla', 1) ('Toasted Oak', 1) ('Smoke', 1) ('Caramel', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="15">
 <div class="catalog-card__media">
 <img alt="Old No.7" class="delayed" data-src="database_images/bottles/jack_daniels_no_7.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1567,11 +1682,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Jack Daniel's Single Barrel Whiskey American whiskey">
+<div class="catalog-card" data-available="1" data-search="Jack Daniel's Single Barrel Whiskey American whiskey ('Vanilla', 1) ('Smoke', 1) ('Oak', 1) ('Caramel', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="21">
 <div class="catalog-card__media">
 <img alt="Single Barrel" class="delayed" data-src="database_images/bottles/jack_daniels_single_barrell.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1586,11 +1701,11 @@
 </div>
 </div>
 </div>
-<div class="catalog-card" data-available="1" data-search="Sierra Tequila Tequila None">
+<div class="catalog-card" data-available="1" data-search="Sierra Tequila Tequila None ('Vanilla', 1) ('Oak', 1) ('Herbal', 1) ('Caramel', 1)" data-special="1">
 <div class="catalog-card__click bottle-card" data-bottle-id="47">
 <div class="catalog-card__media">
 <img alt="Tequila" class="delayed" data-src="database_images/bottles/sierra_tequila.jpg"/>
-<span class="catalog-badge catalog-badge--available">Available</span>
+<span class="catalog-badge catalog-badge--special">Special</span>
 </div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
@@ -1635,15 +1750,19 @@
     const searchInput = document.getElementById("inventory-search");
     const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
     const hideUnavailable = document.getElementById("inventory-hide-unavailable")?.checked;
+    const showOnlySpecial = document.getElementById("filter-special")?.checked;
+    const hideSpecial = document.getElementById("filter-hide-special")?.checked;
     const bottles = document.querySelectorAll("#bottle-grid .catalog-card");
     let visibleCount = 0;
 
     bottles.forEach((bottle) => {
       const searchText = (bottle.dataset.search || "").toLowerCase();
       const isAvailable = bottle.dataset.available === "1";
+      const isSpecial = bottle.dataset.special === "1";
       const matchesSearch = !query || searchText.includes(query);
       const matchesAvailability = !hideUnavailable || isAvailable;
-      const shouldShow = matchesSearch && matchesAvailability;
+      const matchesSpecial = showOnlySpecial ? isSpecial : hideSpecial ? !isSpecial : true;
+      const shouldShow = matchesSearch && matchesAvailability && matchesSpecial;
 
       bottle.classList.toggle("hidden", !shouldShow);
       if (shouldShow) {
@@ -1707,6 +1826,23 @@
     const hideUnavailable = document.getElementById("inventory-hide-unavailable");
     if (hideUnavailable) {
       hideUnavailable.addEventListener("change", applyInventoryFilters);
+    }
+
+    const showOnlySpecial = document.getElementById("filter-special");
+    const hideSpecial = document.getElementById("filter-hide-special");
+    if (showOnlySpecial && hideSpecial) {
+      showOnlySpecial.addEventListener("change", () => {
+        if (showOnlySpecial.checked) {
+          hideSpecial.checked = false;
+        }
+        applyInventoryFilters();
+      });
+      hideSpecial.addEventListener("change", () => {
+        if (hideSpecial.checked) {
+          showOnlySpecial.checked = false;
+        }
+        applyInventoryFilters();
+      });
     }
 
     applyInventoryFilters();
@@ -3752,7 +3888,7 @@
 <!-- Empty Status Checkbox -->
 <div class="flex items-center mt-4">
 <label class="mr-2" for="available-4">Is Available:</label>
-<input class="checkbox" disabled="" id="available-4" type="checkbox"/>
+<input checked="" class="checkbox" disabled="" id="available-4" type="checkbox"/>
 </div>
 <!-- Expert Notes Section -->
 <div class="my-4 p-4 border border-base-300 rounded-lg bg-base-100 shadow-md">
@@ -6345,6 +6481,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-60"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Archie Rose - Dry Grown Rye</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 48% <br/>
       The second release in our Harvest Whisky series, Dry Grown Rye Malt Whisky, Harvest 2019 uses ancient varieties of barley and heirloom rye, grown by the Whytcross family during a time when NSW was suffering severe drought conditions. In this tough situation, we wanted to source as many drought-tolerant grain varieties as possible. The aim was to support the farmers by using whatever grains had survived and to create a whisky and front-label art that was a reflection of these harsh but all too common conditions in Australia.
@@ -6355,7 +6494,7 @@
 <!-- Empty Status Checkbox -->
 <div class="flex items-center mt-4">
 <label class="mr-2" for="available-60">Is Available:</label>
-<input checked="" class="checkbox" disabled="" id="available-60" type="checkbox"/>
+<input class="checkbox" disabled="" id="available-60" type="checkbox"/>
 </div>
 <!-- Expert Notes Section -->
 <div class="my-4 p-4 border border-base-300 rounded-lg bg-base-100 shadow-md">
@@ -6995,6 +7134,571 @@
 <!-- Close Button -->
 <label class="btn btn-sm btn-circle absolute right-2 top-2" for="bottle-modal">✕</label>
 </div>
+<!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-89"><div>
+<!-- Modal Content -->
+<h3 class="font-bold text-lg">Archie Rose - test</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
+<p class="py-4">
+      ABV: 40% <br/>
+      Crafted, distilled and matured in Sydney, Archie Rose Single Malt Whisky is made from a unique six‑malt mash bill and matured predominantly in Australian apera casks, supported by select ex‑bourbon and ex‑oloroso sherry casks. It celebrates Australian malt and provenance through considered cask selection and meticulous maturation, resulting in a refined, complex and well‑balanced single malt.
+    </p>
+<figure class="my-4">
+<img alt="test" class="delayed w-[250px] h-[250px] object-contain mx-auto" src="database_images/bottles/Archie_Rose_test.png"/>
+</figure>
+<!-- Empty Status Checkbox -->
+<div class="flex items-center mt-4">
+<label class="mr-2" for="available-89">Is Available:</label>
+<input checked="" class="checkbox" disabled="" id="available-89" type="checkbox"/>
+</div>
+<!-- Expert Notes Section -->
+<!-- Community Notes Section -->
+<!-- Review Dropdown -->
+<div class="collapse collapse-arrow mt-6 border border-base-300 rounded-box bg-gray-100">
+<input id="review-dropdown-89" type="checkbox"/>
+<label class="collapse-title text-lg font-medium">
+        Add a Review
+      </label>
+<div class="collapse-content">
+<form class="space-y-4" id="addReviewForm-89">
+<!-- Name Dropdown -->
+<div class="form-control">
+<label class="label">
+<span class="label-text">Your Name</span>
+</label>
+<select class="select select-bordered text-2xl" name="name" required="">
+<option disabled="" selected="">Select your name</option>
+<option value="1">Ethan</option>
+<option value="4">Kevin</option>
+<option value="5">Bill</option>
+<option value="6">Marissa</option>
+<option value="7">Andy</option>
+<option value="8">Sara</option>
+</select>
+</div>
+<!-- Tasting Notes with Checkboxes -->
+<div class="form-control">
+<label class="label">
+<span class="label-text text-xl">Select Tasting Notes:</span>
+</label>
+<!-- Parent collapse component with a checkbox for selecting the parent note -->
+<div class="flex items-center mt-4">
+<!-- Checkbox for selecting the parent note (tier 3) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Fruity" name="note_Fruity" type="checkbox"/>
+<!-- Collapse element next to the checkbox -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Fruity" type="checkbox"/>
+<label class="collapse-title text-lg">Fruity</label>
+<div class="collapse-content ml-4">
+<!-- Subnotes (Tier 2) with checkboxes -->
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Cooked Fruit" name="subnote_Cooked Fruit" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Cooked Fruit" type="checkbox"/>
+<label class="collapse-title text-md">Cooked Fruit</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Berry" name="subnote_Berry" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Berry" type="checkbox"/>
+<label class="collapse-title text-md">Berry</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Raspberry" type="checkbox"/>
+<span class="label-text">Raspberry</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Blackberry" type="checkbox"/>
+<span class="label-text">Blackberry</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Blueberry" type="checkbox"/>
+<span class="label-text">Blueberry</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Strawberry" type="checkbox"/>
+<span class="label-text">Strawberry</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Tropical" name="subnote_Tropical" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Tropical" type="checkbox"/>
+<label class="collapse-title text-md">Tropical</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Stone Fruit" name="subnote_Stone Fruit" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Stone Fruit" type="checkbox"/>
+<label class="collapse-title text-md">Stone Fruit</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Fruit" name="subnote_Fruit" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Fruit" type="checkbox"/>
+<label class="collapse-title text-md">Fruit</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Parent collapse component with a checkbox for selecting the parent note -->
+<div class="flex items-center mt-4">
+<!-- Checkbox for selecting the parent note (tier 3) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Spice" name="note_Spice" type="checkbox"/>
+<!-- Collapse element next to the checkbox -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Spice" type="checkbox"/>
+<label class="collapse-title text-lg">Spice</label>
+<div class="collapse-content ml-4">
+<!-- Subnotes (Tier 2) with checkboxes -->
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Baking Spice" name="subnote_Baking Spice" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Baking Spice" type="checkbox"/>
+<label class="collapse-title text-md">Baking Spice</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Savory Spice" name="subnote_Savory Spice" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Savory Spice" type="checkbox"/>
+<label class="collapse-title text-md">Savory Spice</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Parent collapse component with a checkbox for selecting the parent note -->
+<div class="flex items-center mt-4">
+<!-- Checkbox for selecting the parent note (tier 3) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Sweet" name="note_Sweet" type="checkbox"/>
+<!-- Collapse element next to the checkbox -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Sweet" type="checkbox"/>
+<label class="collapse-title text-lg">Sweet</label>
+<div class="collapse-content ml-4">
+<!-- Subnotes (Tier 2) with checkboxes -->
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Vanillas" name="subnote_Vanillas" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Vanillas" type="checkbox"/>
+<label class="collapse-title text-md">Vanillas</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Soda" name="subnote_Soda" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Soda" type="checkbox"/>
+<label class="collapse-title text-md">Soda</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Dessert" name="subnote_Dessert" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Dessert" type="checkbox"/>
+<label class="collapse-title text-md">Dessert</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Brown Sugar" type="checkbox"/>
+<span class="label-text">Brown Sugar</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Butterscotch" type="checkbox"/>
+<span class="label-text">Butterscotch</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Caramel" type="checkbox"/>
+<span class="label-text">Caramel</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Graham Cracker" type="checkbox"/>
+<span class="label-text">Graham Cracker</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Honey" type="checkbox"/>
+<span class="label-text">Honey</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Licorice" type="checkbox"/>
+<span class="label-text">Licorice</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Maple Syrup" type="checkbox"/>
+<span class="label-text">Maple Syrup</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Marshmellow" type="checkbox"/>
+<span class="label-text">Marshmellow</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Molasses" type="checkbox"/>
+<span class="label-text">Molasses</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Toffee" type="checkbox"/>
+<span class="label-text">Toffee</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Chocolates" name="subnote_Chocolates" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Chocolates" type="checkbox"/>
+<label class="collapse-title text-md">Chocolates</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Parent collapse component with a checkbox for selecting the parent note -->
+<div class="flex items-center mt-4">
+<!-- Checkbox for selecting the parent note (tier 3) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Grain" name="note_Grain" type="checkbox"/>
+<!-- Collapse element next to the checkbox -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Grain" type="checkbox"/>
+<label class="collapse-title text-lg">Grain</label>
+<div class="collapse-content ml-4">
+<!-- Subnotes (Tier 2) with checkboxes -->
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Corn" name="subnote_Corn" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Corn" type="checkbox"/>
+<label class="collapse-title text-md">Corn</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Malt" name="subnote_Malt" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Malt" type="checkbox"/>
+<label class="collapse-title text-md">Malt</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Rye" name="subnote_Rye" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Rye" type="checkbox"/>
+<label class="collapse-title text-md">Rye</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Bread" name="subnote_Bread" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Bread" type="checkbox"/>
+<label class="collapse-title text-md">Bread</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Parent collapse component with a checkbox for selecting the parent note -->
+<div class="flex items-center mt-4">
+<!-- Checkbox for selecting the parent note (tier 3) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Wood" name="note_Wood" type="checkbox"/>
+<!-- Collapse element next to the checkbox -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Wood" type="checkbox"/>
+<label class="collapse-title text-lg">Wood</label>
+<div class="collapse-content ml-4">
+<!-- Subnotes (Tier 2) with checkboxes -->
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Oak" name="subnote_Oak" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Oak" type="checkbox"/>
+<label class="collapse-title text-md">Oak</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Pine" name="subnote_Pine" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Pine" type="checkbox"/>
+<label class="collapse-title text-md">Pine</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Nut" name="subnote_Nut" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Nut" type="checkbox"/>
+<label class="collapse-title text-md">Nut</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Almond" type="checkbox"/>
+<span class="label-text">Almond</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Hazelnut" type="checkbox"/>
+<span class="label-text">Hazelnut</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Peanut" type="checkbox"/>
+<span class="label-text">Peanut</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Pecan" type="checkbox"/>
+<span class="label-text">Pecan</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Walnut" type="checkbox"/>
+<span class="label-text">Walnut</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Earthy" name="subnote_Earthy" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Earthy" type="checkbox"/>
+<label class="collapse-title text-md">Earthy</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Coffee" type="checkbox"/>
+<span class="label-text">Coffee</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Leather" type="checkbox"/>
+<span class="label-text">Leather</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Tobacco" type="checkbox"/>
+<span class="label-text">Tobacco</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Peat" type="checkbox"/>
+<span class="label-text">Peat</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Smoke" type="checkbox"/>
+<span class="label-text">Smoke</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Parent collapse component with a checkbox for selecting the parent note -->
+<div class="flex items-center mt-4">
+<!-- Checkbox for selecting the parent note (tier 3) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Floral" name="note_Floral" type="checkbox"/>
+<!-- Collapse element next to the checkbox -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Floral" type="checkbox"/>
+<label class="collapse-title text-lg">Floral</label>
+<div class="collapse-content ml-4">
+<!-- Subnotes (Tier 2) with checkboxes -->
+<div class="flex items-center mt-2">
+<!-- Checkbox for selecting the subnote (tier 2) -->
+<input class="checkbox checkbox-primary mr-4" id="checkbox-Floral" name="subnote_Floral" type="checkbox"/>
+<!-- Collapse for the subnote -->
+<div class="collapse collapse-arrow">
+<input class="peer" id="collapse-Floral" type="checkbox"/>
+<label class="collapse-title text-md">Floral</label>
+<div class="collapse-content ml-4">
+<!-- Subsubnotes (Tier 1) with checkboxes -->
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Rose" type="checkbox"/>
+<span class="label-text">Rose</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Heather" type="checkbox"/>
+<span class="label-text">Heather</span>
+</label>
+</div>
+<div class="form-control">
+<label class="label cursor-pointer">
+<input class="checkbox checkbox-primary" name="subsubnote_Violet" type="checkbox"/>
+<span class="label-text">Violet</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- review_text -->
+<div class="form-control">
+<label class="label">
+<span class="label-text">Your Review</span>
+</label>
+<textarea class="textarea textarea-bordered" name="review_text" placeholder="Write your review here"></textarea>
+</div>
+<!-- Score -->
+<!-- Score with Stars -->
+<div class="form-control">
+<label class="label">
+<span class="label-text">Score</span>
+</label>
+<div class="rating justify-between">
+<input class="mask mask-star-2 bg-yellow-500 animate-none" name="score" required="" type="radio" value="1"/>
+<input class="mask mask-star-2 bg-yellow-500 animate-none" name="score" type="radio" value="2"/>
+<input class="mask mask-star-2 bg-yellow-500 animate-none" name="score" type="radio" value="3"/>
+<input class="mask mask-star-2 bg-yellow-500 animate-none" name="score" type="radio" value="4"/>
+<input class="mask mask-star-2 bg-yellow-500 animate-none" name="score" type="radio" value="5"/>
+<input class="mask mask-star-2 bg-yellow-500 animate-none" name="score" type="radio" value="6"/>
+<input class="mask mask-star-2 bg-yellow-500 animate-none" name="score" type="radio" value="7"/>
+<input class="mask mask-star-2 bg-yellow-500 animate-none" name="score" type="radio" value="8"/>
+<input class="mask mask-star-2 bg-yellow-500 animate-none" name="score" type="radio" value="9"/>
+<input class="mask mask-star-2 bg-yellow-500 animate-none" name="score" type="radio" value="10"/>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="btn btn-primary w-full" id="submitReviewButton-89" type="submit">
+            Submit Review
+          </button>
+</form>
+</div>
+</div>
+<!-- Close Button -->
+<label class="btn btn-sm btn-circle absolute right-2 top-2" for="bottle-modal">✕</label>
+</div>
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-9"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Blanton's - Special Reserve</h3>
@@ -7008,7 +7712,7 @@
 <!-- Empty Status Checkbox -->
 <div class="flex items-center mt-4">
 <label class="mr-2" for="available-9">Is Available:</label>
-<input class="checkbox" disabled="" id="available-9" type="checkbox"/>
+<input checked="" class="checkbox" disabled="" id="available-9" type="checkbox"/>
 </div>
 <!-- Expert Notes Section -->
 <div class="my-4 p-4 border border-base-300 rounded-lg bg-base-100 shadow-md">
@@ -7664,7 +8368,7 @@
 <!-- Empty Status Checkbox -->
 <div class="flex items-center mt-4">
 <label class="mr-2" for="available-10">Is Available:</label>
-<input class="checkbox" disabled="" id="available-10" type="checkbox"/>
+<input checked="" class="checkbox" disabled="" id="available-10" type="checkbox"/>
 </div>
 <!-- Expert Notes Section -->
 <div class="my-4 p-4 border border-base-300 rounded-lg bg-base-100 shadow-md">
@@ -8323,7 +9027,7 @@
 <!-- Empty Status Checkbox -->
 <div class="flex items-center mt-4">
 <label class="mr-2" for="available-11">Is Available:</label>
-<input class="checkbox" disabled="" id="available-11" type="checkbox"/>
+<input checked="" class="checkbox" disabled="" id="available-11" type="checkbox"/>
 </div>
 <!-- Expert Notes Section -->
 <div class="my-4 p-4 border border-base-300 rounded-lg bg-base-100 shadow-md">
@@ -8969,6 +9673,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-48"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Burrito Fiestero - Ensamble Mezcal</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 46% <br/>
       Burrito Ensamble showcases two of Durango, Mexico's most prominent agaves. When Agave Cenizo (Durangensis) and Agave Verde (Cassispina) are brought together, harmony is created, leaving your tastebuds bouncing with flavour.
@@ -9599,6 +10306,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-49"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Casamigos - Mezcal</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       Casamigos Mezcal is a premium mezcal crafted in the Oaxaca region of Mexico using traditional production methods. The mezcal is made from 100% Espadin agave that is cooked in underground pits before being crushed using a horse-drawn stone wheel, then fermented with local spring water, and finally double-distilled in copper pot stills. The result is a smooth and smoky spirit with a complex flavor profile that is perfect for sipping neat or in cocktails. The bottle design is sleek and modern, featuring a black matte finish with a silver agave plant logo, making it a stylish addition to any home bar.
@@ -10229,6 +10939,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-12"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Cragganmore - 12 Year Old</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       Cragganmore 12 Year Old is a complex Speyside single malt whisky praised for its depth and complexity. It is distilled in a small distillery in the largest and most famous whisky region of all in the Scottish Highlands, Cragganmore. Each bottle builds on its Speyside character with sweet floral notes and hints of wood smoke,riverside herbs,vanilla and cereals.
@@ -10859,6 +11572,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-13"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Cragganmore - Distillers Edition</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       With each sip of Cragganmore Distillerâ€™s Edition Single Malt Scotch Whisky, you indulge in feats of unparalleled character and craftsmanship. First matured in refill American Oak &amp; European Oak casks and finished in Port-Seasoned re-charred American Oak casks with heavily re-charred new AO ends,this whisky has a sweet,winey and fruity aroma with a wisp of smoke. On the palate,it is sweet to start with juicy hints of wine and fruit and is balanced by light wood-spice and a smoky undertone with a dry finish of vanilla and cocoa. Serve on the rocks in a tumbler or tulip glass to concentrate its flavor.
@@ -11489,6 +12205,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-45"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Don Julio - Reposada Tequila</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 37% <br/>
       Don Julio GonzÃ¡lez has a history in the art of making Mexico's most famous spirit dating back to 1942. With a reputation for exceeding the standards required to produce quality Tequila, Don Julio's Tequila's are at the heartbeat of Mexico. Don Julio Reposado Tequila is made from 100% premium Blue Agave plant and has become Mexico's highest selling super premium Tequila. Barrel aged for eight months in American white-oak barrels, Don JulioÂ® Reposado Tequila is golden amber in color, and offers a rich, smooth finishâ€”the very essence of the perfect barrel-aged tequila.
@@ -12112,6 +12831,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-20"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Drambuie - Honey Whiskey</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       Drambuie's unique blend of aged scotch whisky infused into a secret selection of spices and heather honey is a staple ingredient used by bartenders worldwide. A unique Highland spirit, exquisite in taste and deliciously potent. The name Drambuie is derived from Scots Gaelic, An Dram Buidheach and means The Drink that Satisfies.
@@ -12742,6 +13464,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-46"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Espolon - Reposada Tequila</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       Handcrafted from 100% pure blue agave, Espolon Reposado premium Tequila celebrates real Mexico and its storied culture through classic 19th century artistry and the iconic rooster, a symbol of national pride. Crafted at the acclaimed San Nicolas distillery in the Los Altos region of Jalisco Espolon Reposado is a bold full bodied tequila with vanilla and brown spice flavours and a long, spicy finish.
@@ -13372,6 +14097,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-54"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Husk - Spiced Bam Bam</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       Husk Distillers Spiced Bam Bam Rum 700ml Is a popular rum crafted for those who value artisanal craftsmanship. With its unique blend of barrel-aged Australian Agricole rum seasoned with roasted wattleseed, sundried orange peel, ginger, Tahitian vanilla beans, and cinnamon, this spiced rum delivers a taste that is both sophisticated and refined.
@@ -14002,6 +14730,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-55"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Husk - Botanic</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       The idea of marrying rum distillation with gin-style botanicals first came to Paul in the little green shed back in 2016. He was making both and there seemed no reason why some sort of spiritual matrimony could occur. Experimentation using lemon myrtle and macadamias plucked (and roasted) from the tree outside convinced him it was a winner. But then events took over with the building of the new distillery and the concept was put on hold. Fast forward to 2019 and Quentin's hand-picked and adventurous distilling team dusted off the distillery record books and took up the challenge to turn this idea into a new concept in rum. This was a big deal. This would challenge peopleâ€™s perception of white rum. Had it ever been done before? Nobody knew. But what was known was that it had to be great. So it was that it took 89 micro-distillation test trials using a wide variety of botanicals before the recipe was finally unveiled.
@@ -14632,6 +15363,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-56"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Husk - Pure Cane</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       An amazing drop for the Tribe that defines â€˜farm to bottleâ€™ from one of Australiaâ€™s leading distilleries. A spirit that is as pure as it looks in the bottle and has to be made with only the freshest sugarcane, hence is only made and released once a year.
@@ -15262,6 +15996,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-38"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Ink - Gin</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       Our original gin. Modern Australian flavours with bold citrus notes of lemon myrtle and sweet orange, followed by warm pepper berry and soft pea flower. A curious deep indigo hue mixes to blush pink with the addition of tonic, sparking conversation wherever it pours.
@@ -15955,6 +16692,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-39"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Ink - Bitter Orange Gin</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       Made with negronis and sun-drenched aperitifs in mind, Ink Bitter Orange Gin is our richest, biggest and boldest gin yet. With a huge botanical basket starred by a melange of oranges - bitter, sweet, rescued and peel - Ink Bitter Orange is rich in round citrus oil and shines in drinks. Bitter Orange is highly versatile, with itâ€™s approachable palette working beautifully in all classic cocktails.
@@ -15965,7 +16705,7 @@
 <!-- Empty Status Checkbox -->
 <div class="flex items-center mt-4">
 <label class="mr-2" for="available-39">Is Available:</label>
-<input checked="" class="checkbox" disabled="" id="available-39" type="checkbox"/>
+<input class="checkbox" disabled="" id="available-39" type="checkbox"/>
 </div>
 <!-- Expert Notes Section -->
 <!-- Community Notes Section -->
@@ -16585,6 +17325,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-40"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Ink - Art Gin</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       Our contemporary gin. A bright, balanced &amp; contemporary gin with bold strokes of juniper, splashes of fresh fruit and flashes of fragrant flowers. The recipe is inspired by the classic still life forms of fruit &amp; flowers, this versatile and velvety smooth ambrosial gin celebrates the confluence of art and nature. Each year we will add to the Ink Art Gin collection with a new limited release label, featuring the artwork of one creative member of our community.
@@ -17215,6 +17958,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-15"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Jack Daniel's - Old No.7</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 40% <br/>
       This is the soul of American whiskey. Its distinct and unique taste comes from refining and mellowing the freshly distilled whiskey drop by drop through 10 feet of sugar maple charcoal. The distilled whiskey is then matured in American Oak barrels hand-made by Jack Daniel's themselves. The only major distiller in the world to make their own barrels. Each batch is made from marrying 170 barrels from all levels of the barrelhouses to achieve consistent colour and taste. Interesting fact - every drop of the world's biggest selling whiskey comes from a single source,Lynchburg,Tennessee.
@@ -17845,6 +18591,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-21"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Jack Daniel's - Single Barrel</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 45% <br/>
       Its distinct and unique taste comes from refining mellowing the freshly distilled whiskey drop by drop through 10 feet of sugar maple charcoal. The distilled whiskey is then matured in American Oak barrels hand-made by Jack Daniel's themselves for a minimum of four plus years and is bottled one barrel at a time as a single individual expression. The only major distiller in the world to make their own barrels. Interesting fact - every drop of the world''s biggest selling whiskey comes from a single source,Lynchburg,Tennessee. Each single barrel expression can vary in flavour profile from soft spice to full bodied and robust.
@@ -18475,6 +19224,9 @@
 <!-- Overlay (click outside to close) --></template><template id="bottle-modal-template-47"><div>
 <!-- Modal Content -->
 <h3 class="font-bold text-lg">Sierra - Tequila</h3>
+<div class="mt-2">
+<span class="badge badge-primary">Special</span>
+</div>
 <p class="py-4">
       ABV: 38% <br/>
       Sierra Tequila Reposado is traditionally distilled twice in copper pot stills. It matures for nine months in toasted oak barrels, which gives it its shimmering golden colour. Reposado is the favourite variety of tequila among Mexicans. The fresh, irresistible fruitiness of Sierra Tequila Reposado carries delicate notes of vanilla, caramel, and herbs. A recipient of numerous international awards, Sierra Tequila Reposadoâ€™s diversity of aromas makes it especially complex.

@@ -6,7 +6,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="static/css/tailwind.output.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-<title>Events - John's bahr</title>
+<title>Distilleries - John's bahr</title>
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap");
 
@@ -639,298 +639,273 @@
 <div class="catalog-content">
 <div class="catalog-hero">
 <div>
-<p class="catalog-eyebrow">Tasting calendar</p>
-<h1 class="catalog-title">Events</h1>
+<p class="catalog-eyebrow">Distillery atlas</p>
+<h1 class="catalog-title">Distilleries</h1>
 <p class="catalog-subtitle">
-          Plan tastings, manage guest lists, and track the bottles poured at each event.
+          Explore the distilleries behind the collection and preview their locations.
         </p>
 <div class="catalog-stats">
 <div class="catalog-stat">
-<span class="catalog-stat__label">Total events</span>
-<span class="catalog-stat__value">1</span>
-</div>
-<div class="catalog-stat">
-<span class="catalog-stat__label">Guests invited</span>
-<span class="catalog-stat__value">3</span>
-</div>
-<div class="catalog-stat">
-<span class="catalog-stat__label">Bottles poured</span>
-<span class="catalog-stat__value">3</span>
+<span class="catalog-stat__label">Total distilleries</span>
+<span class="catalog-stat__value">9</span>
 </div>
 </div>
 </div>
 <div class="catalog-actions">
-<label class="btn btn-primary catalog-btn" for="add-event-modal">Add Event</label>
+<a class="btn btn-primary catalog-btn" href="distilleries/globe.html">Globe view</a>
+<a class="btn btn-secondary catalog-btn" href="inventory.html">Back to inventory</a>
 </div>
 </div>
-<!-- Add Event Modal -->
-<input class="modal-toggle" id="add-event-modal" type="checkbox"/>
-<div class="modal">
-<div class="modal-box">
-<h3 class="font-bold text-lg">Add a New Event</h3>
-<form class="space-y-4" id="addEventForm">
-<!-- Event Name -->
-<div class="form-control">
-<label class="label">
-<span class="label-text">Event Name</span>
-</label>
-<input class="input input-bordered" name="name" required="" type="text"/>
-</div>
-<!-- Event Date -->
-<div class="form-control">
-<label class="label">
-<span class="label-text">Event Date</span>
-</label>
-<input class="input input-bordered" name="event_date" required="" type="date"/>
-</div>
-<!-- Submit Button -->
-<div class="modal-action">
-<button class="btn btn-primary" type="submit">Add Event</button>
-<label class="btn" for="add-event-modal">Cancel</label>
-</div>
-</form>
-</div>
-</div>
-<script>
-
-document.getElementById("addEventForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  // Collect form data
-  const formData = new FormData(e.target);
-  const jsonData = {};
-
-  // Convert form data to JSON
-  formData.forEach((value, key) => {
-    jsonData[key] = value; // Directly map form data to JSON
-    });
-
-
-    await sendEventRequest(jsonData);
-
-});
-
-// Function to send POST request
-async function sendEventRequest(data) {
-  try {
-    showLoadingOverlay();
-    const response = await fetch("/api/add_event", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
-    if (response.ok) {
-      showAlert("Event added successfully!", "success");
-      document.getElementById("addEventForm").reset(); // Reset the form
-      document.getElementById("add-event-modal").checked = false; // Close the modal
-      location.reload();
-    } else {
-      showAlert(result.error || "Failed to add the event.", "error");
-    }
-  } catch (error) {
-    showAlert("An error occurred while adding the event.", "error");
-    console.error(error);
-  }
-  hideLoadingOverlay();
-}
-</script>
 <div class="catalog-controls">
 <div class="catalog-search">
-<label class="catalog-search__label" for="event-search">Search events</label>
-<input class="input input-bordered catalog-search__input" id="event-search" placeholder="Search by name or date" type="text"/>
+<label class="catalog-search__label" for="distillery-search">Search distilleries</label>
+<input class="input input-bordered catalog-search__input" id="distillery-search" placeholder="Search name, country, or region" type="text"/>
 <div class="catalog-search__meta">
-<span id="event-count">1 events</span>
-</div>
-</div>
-<div class="catalog-controls__actions">
-<label class="catalog-toggle">
-<input class="checkbox checkbox-primary" id="events-with-guests" type="checkbox"/>
-<span>Only with guests</span>
-</label>
-<label class="catalog-toggle">
-<input class="checkbox checkbox-primary" id="events-with-bottles" type="checkbox"/>
-<span>Only with bottles</span>
-</label>
-<div class="catalog-filter-group">
-<button class="btn btn-tertiary" onclick="clearEventFilters()" type="button">
-            Reset filters
-          </button>
+<span id="distillery-count">9 distilleries</span>
 </div>
 </div>
 </div>
-<div class="catalog-grid" id="event-grid">
-<div class="catalog-card" data-has-bottles="1" data-has-guests="1" data-search="Birthday Party! 2026-01-12">
-<label class="catalog-card__click" for="event-modal-3">
+<div class="catalog-grid" id="distillery-grid">
+<div class="catalog-card" data-search="Archie Rose Distilling Co. – Botany (Banksmeadow) Distillery Australia New South Wales">
+<div class="catalog-card__click distillery-card" data-distillery-id="1">
+<div class="catalog-card__media flex items-center justify-center bg-base-200">
+<img alt="Archie Rose Distilling Co. – Botany (Banksmeadow) Distillery" class="object-cover w-full h-56 md:h-72" src="database_images/distilleries/Archie_Rose_Distilling_Co._–_Botany_(Banksmeadow)_Distillery.jpg"/>
+</div>
 <div class="catalog-card__body">
 <div class="catalog-card__header">
-<h2 class="catalog-card__brand">Birthday Party!</h2>
+<h2 class="catalog-card__brand">Archie Rose Distilling Co. – Botany (Banksmeadow) Distillery</h2>
 </div>
-<p class="catalog-card__name">2026-01-12</p>
+<p class="catalog-card__name">
+              New South Wales,
+              Australia
+            </p>
 <div class="catalog-card__meta">
-<span class="catalog-chip">3 guests</span>
-<span class="catalog-chip catalog-chip--muted">3 bottles</span>
+<span class="catalog-chip">Location set</span>
 </div>
 </div>
-</label>
 </div>
-<input class="modal-toggle" id="event-modal-3" type="checkbox"/>
+</div>
+<div class="catalog-card" data-search="Buffalo Trace Distillery United States Kentucky">
+<div class="catalog-card__click distillery-card" data-distillery-id="3">
+<div class="catalog-card__media flex items-center justify-center bg-base-200">
+<img alt="Buffalo Trace Distillery" class="object-cover w-full h-56 md:h-72" src="database_images/distilleries/Buffalo_Trace_Distillery.jpg"/>
+</div>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Buffalo Trace Distillery</h2>
+</div>
+<p class="catalog-card__name">
+              Kentucky,
+              United States
+            </p>
+<div class="catalog-card__meta">
+<span class="catalog-chip">Location set</span>
+</div>
+</div>
+</div>
+</div>
+<div class="catalog-card" data-search="Casa Armando Guillermo Prieto (AGP) Mexico Oaxaca">
+<div class="catalog-card__click distillery-card" data-distillery-id="8">
+<div class="catalog-card__media flex items-center justify-center bg-base-200">
+<img alt="Casa Armando Guillermo Prieto (AGP)" class="object-cover w-full h-56 md:h-72" src="database_images/distilleries/Casa_Armando_Guillermo_Prieto_(AGP).jpg"/>
+</div>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Casa Armando Guillermo Prieto (AGP)</h2>
+</div>
+<p class="catalog-card__name">
+              Oaxaca,
+              Mexico
+            </p>
+<div class="catalog-card__meta">
+<span class="catalog-chip catalog-chip--muted">Location pending</span>
+</div>
+</div>
+</div>
+</div>
+<div class="catalog-card" data-search="Cragganmore Distillery Scotland Speyside (Moray)">
+<div class="catalog-card__click distillery-card" data-distillery-id="9">
+<div class="catalog-card__media flex items-center justify-center bg-base-200">
+<img alt="Cragganmore Distillery" class="object-cover w-full h-56 md:h-72" src="database_images/distilleries/Cragganmore_Distillery.jpg"/>
+</div>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Cragganmore Distillery</h2>
+</div>
+<p class="catalog-card__name">
+              Speyside (Moray),
+              Scotland
+            </p>
+<div class="catalog-card__meta">
+<span class="catalog-chip">Location set</span>
+</div>
+</div>
+</div>
+</div>
+<div class="catalog-card" data-search="Destiladora San Nicolás, S.A. de C.V. Mexico Jalisco">
+<div class="catalog-card__click distillery-card" data-distillery-id="12">
+<div class="catalog-card__media flex items-center justify-center bg-base-200">
+<img alt="Destiladora San Nicolás, S.A. de C.V." class="object-cover w-full h-56 md:h-72" src="database_images/distilleries/Destiladora_San_Nicolas_S.A._de_C.V_12.jpg"/>
+</div>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Destiladora San Nicolás, S.A. de C.V.</h2>
+</div>
+<p class="catalog-card__name">
+              Jalisco,
+              Mexico
+            </p>
+<div class="catalog-card__meta">
+<span class="catalog-chip">Location set</span>
+</div>
+</div>
+</div>
+</div>
+<div class="catalog-card" data-search="Destilería Sierra, S.A. de C.V. Mexico Jalisco">
+<div class="catalog-card__click distillery-card" data-distillery-id="16">
+<div class="catalog-card__media flex items-center justify-center bg-base-200">
+<img alt="Destilería Sierra, S.A. de C.V." class="object-cover w-full h-56 md:h-72" src="database_images/distilleries/Destileria_Sierra_S.A._de_C.V_16.jpg"/>
+</div>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Destilería Sierra, S.A. de C.V.</h2>
+</div>
+<p class="catalog-card__name">
+              Jalisco,
+              Mexico
+            </p>
+<div class="catalog-card__meta">
+<span class="catalog-chip">Location set</span>
+</div>
+</div>
+</div>
+</div>
+<div class="catalog-card" data-search="Girvan Distillery Scotland, United Kingdom South Ayrshire">
+<div class="catalog-card__click distillery-card" data-distillery-id="11">
+<div class="catalog-card__media flex items-center justify-center bg-base-200">
+<img alt="Girvan Distillery" class="object-cover w-full h-56 md:h-72" src="database_images/distilleries/Girvan_Distillery.jpg"/>
+</div>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Girvan Distillery</h2>
+</div>
+<p class="catalog-card__name">
+              South Ayrshire,
+              Scotland, United Kingdom
+            </p>
+<div class="catalog-card__meta">
+<span class="catalog-chip">Location set</span>
+</div>
+</div>
+</div>
+</div>
+<div class="catalog-card" data-search="Husk Farm Distillery (Husk Distillers) Australia New South Wales">
+<div class="catalog-card__click distillery-card" data-distillery-id="13">
+<div class="catalog-card__media flex items-center justify-center bg-base-200">
+<img alt="Husk Farm Distillery (Husk Distillers)" class="object-cover w-full h-56 md:h-72" src="database_images/distilleries/Husk_Farm_Distillery_(Husk_Distillers).jpg"/>
+</div>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Husk Farm Distillery (Husk Distillers)</h2>
+</div>
+<p class="catalog-card__name">
+              New South Wales,
+              Australia
+            </p>
+<div class="catalog-card__meta">
+<span class="catalog-chip">Location set</span>
+</div>
+</div>
+</div>
+</div>
+<div class="catalog-card" data-search="Jack Daniel Distillery (Lem Motlow, Prop., Inc.) United States Tennessee">
+<div class="catalog-card__click distillery-card" data-distillery-id="15">
+<div class="catalog-card__media flex items-center justify-center bg-base-200">
+<img alt="Jack Daniel Distillery (Lem Motlow, Prop., Inc.)" class="object-cover w-full h-56 md:h-72" src="database_images/distilleries/Jack_Daniel_Distillery_Lem_Motlow_Prop._Inc_15.jpg"/>
+</div>
+<div class="catalog-card__body">
+<div class="catalog-card__header">
+<h2 class="catalog-card__brand">Jack Daniel Distillery (Lem Motlow, Prop., Inc.)</h2>
+</div>
+<p class="catalog-card__name">
+              Tennessee,
+              United States
+            </p>
+<div class="catalog-card__meta">
+<span class="catalog-chip">Location set</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<input class="modal-toggle" id="distillery-modal" type="checkbox"/>
 <div class="modal">
-<div class="modal-box relative">
-<!-- Modal Content -->
-<h3 class="font-bold text-lg">Birthday Party!</h3>
-<h4 class="font-bold text-lg">2026-01-12</h4>
-<figure class="my-4">
-<div id="qrcode-3"></div>
-</figure>
-<script>
-      document.addEventListener("DOMContentLoaded", generateQRCode);
-  
-      function generateQRCode() {
-        const url = `/event?id=3&version=client`;
-        const qrCodeContainer = document.getElementById("qrcode-3");
-  
-        // Clear any existing QR code
-        qrCodeContainer.innerHTML = "";
-  
-        // Generate QR code
-        new QRCode(qrCodeContainer, {
-          text: url,
-          width: 200,  
-          height: 200, 
-        });
-      }
-    </script>
-<div class="grid grid-cols-2">
-<div class="btn btn-primary mr-2" onclick="window.location.href='/event?id=3&amp;version=console'">Event Console</div>
-<div class="btn btn-primary mr-2" onclick="window.location.href='/event?id=3&amp;version=client'">Event Client</div>
+<div class="modal-box relative" id="distillery-modal-content">
+<p class="text-center">Loading...</p>
 </div>
-<h3 class="font-bold text-lg mt-4">Bottles</h3>
-<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
-<!-- Bottle Image -->
-<img alt="Blanton's - Special Reserve" class="w-32 h-32 object-contain rounded-md" src="database_images/bottles/blantons_special_reserve.jpg"/>
-<!-- Bottle Details -->
-<div>
-<h3 class="font-bold text-lg">Blanton's - Special Reserve</h3>
-</div>
-</div>
-<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
-<!-- Bottle Image -->
-<img alt="Blanton's - Private Reserve" class="w-32 h-32 object-contain rounded-md" src="database_images/bottles/blantons_private_reserve.jpg"/>
-<!-- Bottle Details -->
-<div>
-<h3 class="font-bold text-lg">Blanton's - Private Reserve</h3>
-</div>
-</div>
-<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
-<!-- Bottle Image -->
-<img alt="Blanton's - Gold" class="w-32 h-32 object-contain rounded-md" src="database_images/bottles/blantons_gold.jpg"/>
-<!-- Bottle Details -->
-<div>
-<h3 class="font-bold text-lg">Blanton's - Gold</h3>
-</div>
-</div>
-<h3 class="font-bold text-lg mt-4">Participants</h3>
-<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
-<!-- user Image -->
-<img alt=" - Kevin" class="w-32 h-32 object-contain rounded-md" src="database_images/users/Kevin.png"/>
-<!-- user Details -->
-<div>
-<h3 class="font-bold text-lg">Kevin</h3>
-</div>
-</div>
-<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
-<!-- user Image -->
-<img alt=" - Bill" class="w-32 h-32 object-contain rounded-md" src="database_images/users/Bill.png"/>
-<!-- user Details -->
-<div>
-<h3 class="font-bold text-lg">Bill</h3>
-</div>
-</div>
-<div class="grid grid-cols-[auto,1fr] items-center gap-4 mb-4 mt-4">
-<!-- user Image -->
-<img alt=" - Ethan" class="w-32 h-32 object-contain rounded-md" src="database_images/users/Ethan.png"/>
-<!-- user Details -->
-<div>
-<h3 class="font-bold text-lg">Ethan</h3>
-</div>
-</div>
-<!-- Close Button -->
-<label class="btn btn-sm btn-circle absolute right-2 top-2" for="event-modal-3">✕</label>
-</div>
-<!-- Overlay (click outside to close) -->
-<label class="modal-backdrop" for="event-modal-3"></label>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-</div>
-</div>
+<label class="modal-backdrop" for="distillery-modal"></label>
 </div>
 <script>
-  function applyEventFilters() {
-    const searchInput = document.getElementById("event-search");
+  function applyDistilleryFilters() {
+    const searchInput = document.getElementById("distillery-search");
     const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
-    const onlyWithGuests = document.getElementById("events-with-guests")?.checked;
-    const onlyWithBottles = document.getElementById("events-with-bottles")?.checked;
-    const cards = document.querySelectorAll("#event-grid .catalog-card");
+    const cards = document.querySelectorAll("#distillery-grid .catalog-card");
     let visibleCount = 0;
 
     cards.forEach((card) => {
       const searchText = (card.dataset.search || "").toLowerCase();
-      const hasGuests = card.dataset.hasGuests === "1";
-      const hasBottles = card.dataset.hasBottles === "1";
-      const matchesSearch = !query || searchText.includes(query);
-      const matchesGuests = !onlyWithGuests || hasGuests;
-      const matchesBottles = !onlyWithBottles || hasBottles;
-      const shouldShow = matchesSearch && matchesGuests && matchesBottles;
-
+      const shouldShow = !query || searchText.includes(query);
       card.classList.toggle("hidden", !shouldShow);
       if (shouldShow) {
         visibleCount += 1;
       }
     });
 
-    const countEl = document.getElementById("event-count");
+    const countEl = document.getElementById("distillery-count");
     if (countEl) {
-      countEl.textContent = `${visibleCount} events`;
+      countEl.textContent = `${visibleCount} distilleries`;
     }
   }
 
-  function clearEventFilters() {
-    const searchInput = document.getElementById("event-search");
-    const guestsToggle = document.getElementById("events-with-guests");
-    const bottlesToggle = document.getElementById("events-with-bottles");
-    if (searchInput) {
-      searchInput.value = "";
+  async function fetchAndOpenDistilleryModal(distilleryId) {
+    const modalContent = document.getElementById("distillery-modal-content");
+    const modalCheckbox = document.getElementById("distillery-modal");
+
+    modalCheckbox.checked = true;
+    modalContent.innerHTML = `<div class="text-center py-6">Loading...</div>`;
+
+    try {
+      const response = await fetch("/modal/distillery", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ distillery_id: distilleryId }),
+      });
+
+      const html = await response.text();
+      modalContent.innerHTML = html;
+    } catch (err) {
+      console.error("Error loading distillery modal:", err);
+      modalContent.innerHTML = `<div class="text-center text-error py-6">Failed to load distillery information.</div>`;
     }
-    if (guestsToggle) {
-      guestsToggle.checked = false;
-    }
-    if (bottlesToggle) {
-      bottlesToggle.checked = false;
-    }
-    applyEventFilters();
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.getElementById("event-search");
+    const cards = document.querySelectorAll(".distillery-card");
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const distilleryId = card.dataset.distilleryId;
+        fetchAndOpenDistilleryModal(distilleryId);
+      });
+    });
+
+    const searchInput = document.getElementById("distillery-search");
     if (searchInput) {
-      searchInput.addEventListener("input", applyEventFilters);
+      searchInput.addEventListener("input", applyDistilleryFilters);
     }
 
-    const guestsToggle = document.getElementById("events-with-guests");
-    if (guestsToggle) {
-      guestsToggle.addEventListener("change", applyEventFilters);
-    }
-
-    const bottlesToggle = document.getElementById("events-with-bottles");
-    if (bottlesToggle) {
-      bottlesToggle.addEventListener("change", applyEventFilters);
-    }
-
-    applyEventFilters();
+    applyDistilleryFilters();
   });
 </script>
 </div>
